@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "pysymbol-llm"
+  site-url: "https://AnswerDotAI.github.io/pysymbol-llm"
+  description: "Generate manifest of public symbols win python projects w/docstrings"
+  repo-branch: main
+  repo-url: "https://github.com/AnswerDotAI/pysymbol-llm"
