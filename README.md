@@ -32,12 +32,6 @@ Install latest from the GitHub
 $ pip install git+https://github.com/AnswerDotAI/pysymbol-llm.git
 ```
 
-or from [conda](https://anaconda.org/AnswerDotAI/pysymbol-llm)
-
-``` sh
-$ conda install -c AnswerDotAI pysymbol_llm
-```
-
 or from [pypi](https://pypi.org/project/pysymbol-llm/)
 
 ``` sh
