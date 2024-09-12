@@ -119,6 +119,7 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
                             markdown.append(f"    - `{method_decorator_str} def {method_signature}`\n")
                             if method_doc:
                                 markdown.append(f"        {method_doc.strip()}\n\n")
+                        markdown.append("\n")
             else:
                 if verbose: print(f"No public symbols found in {module_name}")
         except Exception as e:

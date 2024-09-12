@@ -32,6 +32,7 @@
     - ` def __call__(self, *args, **kwargs)`
     - ` def __getitem__(self, *args)`
     - ` def __bool__(self)`
+
 - ` def tonull(x)`
     Convert `None` to `null`
 
@@ -49,6 +50,7 @@
 
     - ` def __enter__(self)`
     - ` def __exit__(self, *args)`
+
 - ` def exec_local(code, var_name)`
     Call `exec` on `code` and return the var `var_name`
 
@@ -57,6 +59,7 @@
 
 - ` class Inf`
     Infinite lists
+
 
 - ` def in_(x, a)`
     `True` if `x in a`
@@ -89,17 +92,20 @@
     - ` def __setattr__(self, k, v)`
     - ` def __dir__(self)`
     - ` def copy(self)`
+
 - ` class AttrDictDefault`
     `AttrDict` subclass that returns `None` for missing attrs
 
     - ` def __init__(self, *args, **kwargs)`
     - ` def __getattr__(self, k)`
+
 - ` class NS`
     `SimpleNamespace` subclass that also adds `iter` and `dict` support
 
     - ` def __iter__(self)`
     - ` def __getitem__(self, x)`
     - ` def __setitem__(self, x, y)`
+
 - ` def get_annotations_ex(obj)`
     Backport of py3.10 `get_annotations` that returns globals/locals
 
@@ -162,12 +168,14 @@
 
     - ` def __getattr__(self, k)`
     - ` def __dir__(self)`
+
 - ` class GetAttr`
     Inherit from this to have all attr accesses in `self._xtra` passed down to `self.default`
 
     - ` def __getattr__(self, k)`
     - ` def __dir__(self)`
     - ` def __setstate__(self, data)`
+
 - ` def delegate_attr(self, k, to)`
     Use in `__getattr__` to delegate to attr `to` without inheriting from `GetAttr`
 
@@ -175,14 +183,18 @@
     Base class that prints for `show`
 
     - ` def show(self, *args, **kwargs)`
+
 - ` class Int`
     An extensible `int`
+
 
 - ` class Str`
     An extensible `str`
 
+
 - ` class Float`
     An extensible `float`
+
 
 - ` def partition(coll, f)`
     Partition a collection by a predicate
@@ -299,11 +311,13 @@
     - ` def add(self, *args)`
         `+` is already defined in `tuple` for concat, so use `add` instead
 
+
 - ` class bind`
     Same as `partial`, except you can use `arg0` `arg1` etc param placeholders
 
     - ` def __init__(self, func, *pargs, **pkwargs)`
     - ` def __call__(self, *args, **kwargs)`
+
 - ` def mapt(func, *iterables)`
     Tuplified `map`
 
@@ -345,11 +359,13 @@
 
     - `@classmethod def imports(cls)`
     - `@property def name(self)`
+
 - ` class StrEnum`
     An `ImportEnum` that behaves like a `str`
 
     - ` def __str__(self)`
     - `@property def name(self)`
+
 - ` def str_enum(name, *vals)`
     Simplified creation of `StrEnum` types
 
@@ -358,12 +374,14 @@
 
     - ` def __str__(self)`
     - `@property def name(self)`
+
 - ` class Stateful`
     A base class/mixin for objects that should not serialize all their state
 
     - ` def __init__(self, *args, **kwargs)`
     - ` def __getstate__(self)`
     - ` def __setstate__(self, state)`
+
 - ` class NotStr`
     Behaves like a `str`, but isn't an instance of one
 
@@ -379,10 +397,12 @@
     - ` def __bool__(self)`
     - ` def __contains__(self, b)`
     - ` def __iter__(self)`
+
 - ` class PrettyString`
     Little hack to get strings to show properly in Jupyter.
 
     - ` def __repr__(self)`
+
 - ` def even_mults(start, stop, n)`
     Build log-stepped array from `start` to `stop` in `n` steps.
 
@@ -433,11 +453,13 @@
     - ` def __getitem__(self, k)`
         Find first matching type that is a super-class of `k`
 
+
 - ` class DispatchReg`
     A global registry for `TypeDispatch` objects keyed by function name
 
     - ` def __init__(self)`
     - ` def __call__(self, f)`
+
 - ` def retain_meta(x, res, as_copy)`
     Call `res.set_meta(x)`, if it exists
 
@@ -508,8 +530,10 @@
     - ` def read_to_next_unindented_line(self)`
     - ` def peek(self, n)`
     - ` def is_empty(self)`
+
 - ` class ParseError`
     - ` def __str__(self)`
+
 - ` class NumpyDocString`
     Parses a numpydoc string to an abstract representation
 
@@ -518,6 +542,7 @@
     - ` def __len__(self)`
     - ` def __getitem__(self, key)`
     - ` def __setitem__(self, key, val)`
+
 - ` def dedent_lines(lines, split)`
     Deindent a list of lines maximally
 
@@ -558,6 +583,7 @@
     - ` def __delitem__(self, i)`
     - ` def __repr__(self)`
     - ` def __iter__(self)`
+
 - ` class L`
     Behaves like a list of `items` but can also index with list of indices or masks
 
@@ -604,6 +630,7 @@
     - ` def sum(self)`
     - ` def product(self)`
     - ` def setattrs(self, attr, val)`
+
 - ` def save_config_file(file, d, **kwargs)`
     Write settings dict to a new config file, or overwrite the existing one.
 
@@ -619,6 +646,7 @@
     - ` def __getitem__(self, k)`
     - ` def get(self, k, default)`
     - ` def path(self, k, default)`
+
 ## fastcore.imghdr
 
 > Recognize image file formats based on their first few bytes.
@@ -705,22 +733,27 @@
     A metaclass that fixes the signature on classes that override `__new__`
 
     - ` def __new__(cls, name, bases, dict)`
+
 - ` class PrePostInitMeta`
     A metaclass that calls optional `__pre_init__` and `__post_init__` methods
 
     - ` def __call__(cls, *args, **kwargs)`
+
 - ` class AutoInit`
     Same as `object`, but no need for subclasses to call `super().__init__`
 
     - ` def __pre_init__(self, *args, **kwargs)`
+
 - ` class NewChkMeta`
     Metaclass to avoid recreating object passed to constructor
 
     - ` def __call__(cls, x, *args, **kwargs)`
+
 - ` class BypassNewMeta`
     Metaclass: casts `x` to this class if it's of type `cls._bypass_type`
 
     - ` def __call__(cls, x, *args, **kwargs)`
+
 - ` def empty2none(p)`
     Replace `Parameter.empty` with `None`
 
@@ -755,8 +788,10 @@
 - ` class HTTP4xxClientError`
     Base class for client exceptions (code 4xx) from `url*` functions
 
+
 - ` class HTTP5xxServerError`
     Base class for server exceptions (code 5xx) from `url*` functions
+
 
 - ` def urlopen(url, data, headers, timeout, **kwargs)`
     Like `urllib.request.urlopen`, but first `urlwrap` the `url`, and encode `data`
@@ -821,11 +856,13 @@
 
     - ` def __init__(self, max_workers, on_exc, pause, **kwargs)`
     - ` def map(self, f, items, *args, **kwargs)`
+
 - `@delegates() class ProcessPoolExecutor`
     Same as Python's ProcessPoolExecutor, except can pass `max_workers==0` for serial execution
 
     - ` def __init__(self, max_workers, on_exc, pause, **kwargs)`
     - ` def map(self, f, items, *args, **kwargs)`
+
 - ` def parallel(f, items, *args, **kwargs)`
     Applies `func` in parallel to `items`, using `n_workers`
 
@@ -873,6 +910,7 @@
     - `@property def pre(self)`
     - `@property def kwargs(self)`
     - ` def __repr__(self)`
+
 - ` def anno_parser(func, prog)`
     Look at params (annotated with `Param`) in func and return an `ArgumentParser`
 
@@ -891,6 +929,7 @@
 
     - ` def __init__(self, name, code, typ)`
     - ` def __str__(self)`
+
 - ` class Style`
     A minimal terminal text styler.
 
@@ -899,6 +938,7 @@
     - ` def __getattr__(self, k)`
     - ` def __call__(self, obj)`
     - ` def __repr__(self)`
+
 - ` def demo()`
     Demonstrate all available styles and their codes.
 
@@ -948,6 +988,7 @@
     - ` def __init__(self, ex, regex)`
     - ` def __enter__(self)`
     - ` def __exit__(self, type, value, traceback)`
+
 ## fastcore.transform
 
 > Definition of `Transform` and `Pipeline`
@@ -961,18 +1002,22 @@
     - ` def decode(self, x, **kwargs)`
     - ` def __repr__(self)`
     - ` def setup(self, items, train_setup)`
+
 - ` class InplaceTransform`
     A `Transform` that modifies in-place and just returns whatever it's passed
+
 
 - ` class DisplayedTransform`
     A transform with a `__repr__` that shows its attrs
 
     - `@property def name(self)`
+
 - ` class ItemTransform`
     A transform that always take tuples as items
 
     - ` def __call__(self, x, **kwargs)`
     - ` def decode(self, x, **kwargs)`
+
 - ` def get_func(t, name, *args, **kwargs)`
     Get the `t.name` (potentially partial-ized with `args` and `kwargs`) or `noop` if not defined
 
@@ -982,6 +1027,7 @@
     - ` def __init__(self, name, *args, **kwargs)`
     - ` def __repr__(self)`
     - ` def __call__(self, t)`
+
 - ` def compose_tfms(x, tfms, is_enc, reverse, **kwargs)`
     Apply all `func_nm` attribute of `tfms` on `x`, maybe in `reverse` order
 
@@ -1008,6 +1054,7 @@
     - ` def __dir__(self)`
     - ` def decode(self, o, full)`
     - ` def show(self, o, ctx, **kwargs)`
+
 ## fastcore.xdg
 
 > XDG Base Directory Specification helpers.
@@ -1049,6 +1096,7 @@
     - ` def __add__(self, b)`
     - ` def __getitem__(self, idx)`
     - ` def __iter__(self)`
+
 - ` def ft(tag, *c, **kw)`
     Create an `FT` structure for `to_xml()`
 
@@ -1057,6 +1105,7 @@
 
 - ` class Safe`
     - ` def __html__(self)`
+
 - ` def to_xml(elm, lvl, indent, do_escape)`
     Convert `ft` element tree into an XML string
 
@@ -1155,6 +1204,7 @@
     Base class to add iteration to anything supporting `__len__` and `__getitem__`
 
     - ` def __iter__(self)`
+
 - `@docs class ReindexCollection`
     Reindexes collection `coll` with indices `idxs` and optional LRU cache of size `cache`
 
@@ -1166,6 +1216,7 @@
     - ` def cache_clear(self)`
     - ` def __getstate__(self)`
     - ` def __setstate__(self, s)`
+
 - ` def get_source_link(func)`
     Return link to `func` in source code
 
@@ -1199,6 +1250,7 @@
 
     - `@property def duration(self)`
     - `@property def freq(self)`
+
 - ` def stringfmt_names(s)`
     Unique brace-delimited names in `s`
 
@@ -1208,6 +1260,7 @@
     - ` def __init__(self)`
     - ` def get_field(self, nm, args, kwargs)`
     - ` def check_unused_args(self, used, args, kwargs)`
+
 - ` def partial_format(s, **kwargs)`
     string format `s`, ignoring missing field errors, returning missing and extra fields
 
@@ -1229,6 +1282,7 @@
     - ` def __init__(self, mgrs)`
     - ` def __enter__(self)`
     - ` def __exit__(self, *args, **kwargs)`
+
 - ` def shufflish(x, pct)`
     Randomly relocate items of `x` up to `pct` of `len(x)` from their starting location
 
@@ -1246,6 +1300,7 @@
     - ` def __str__(self)`
     - ` def __bool__(self)`
     - `@property def name(self)`
+
 - ` def nullable_dc(cls)`
     Like `dataclass`, but default of `UNSET` added to fields without defaults
 
