@@ -18,7 +18,7 @@ def format_symbol(name, signature, doc, decorators=None, is_method=False):
     "format the information in markdown"
     params = signature.split('(', 1)[1].rsplit(')', 1)[0] if '(' in signature else ''
     decorator_str = ' '.join(f'@{d}' for d in decorators) + ' ' if decorators else ''
-    formatted = f"- `{decorator_str}{name}({params})`\n" if is_method else f"- `{decorator_str}def {name}({params})`\n"    
+    formatted = f"- `{decorator_str.strip()}{' ' if decorator_str else ''}{'def ' if not is_method else ''}{name}({params})`\n"
     if doc:
         doc_lines = doc.strip().split('\n')
         formatted += '    ' + '\n    '.join(doc_lines) + '\n'
@@ -105,13 +105,13 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
                     if symbol[0] == 'function':
                         _, name, signature, doc, decorators = symbol
                         decorator_str = ' '.join(f'@{d}' for d in decorators)
-                        markdown.append(f"- `{decorator_str} def {signature}`\n")
+                        markdown.append(f"- `{decorator_str + ' ' if decorator_str else ''}def {signature}`\n")
                         if doc:
                             markdown.append(f"    {doc.strip()}\n\n")
                     elif symbol[0] == 'class':
                         _, name, class_doc, class_decorators, methods = symbol
                         decorator_str = ' '.join(f'@{d}' for d in class_decorators)
-                        markdown.append(f"- `{decorator_str} class {name}`\n")
+                        markdown.append(f"- `{decorator_str + ' ' if decorator_str else ''}class {name}`\n")
                         if class_doc:
                             markdown.append(f"    {class_doc.strip()}\n\n")
                         for method_name, method_signature, method_doc, method_decorators in methods:
