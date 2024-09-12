@@ -116,7 +116,7 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
                             markdown.append(f"    {class_doc.strip()}\n\n")
                         for method_name, method_signature, method_doc, method_decorators in methods:
                             method_decorator_str = ' '.join(f'@{d}' for d in method_decorators)
-                            markdown.append(f"    - `{method_decorator_str} def {method_signature}`\n")
+                            markdown.append(f"    - `{method_decorator_str + ' ' if method_decorator_str else ''}def {method_signature}`\n")
                             if method_doc:
                                 markdown.append(f"        {method_doc.strip()}\n\n")
                         markdown.append("\n")
