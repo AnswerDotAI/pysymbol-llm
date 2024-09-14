@@ -131,10 +131,10 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
 @call_parse
 def pysym2md(package_name:Param("Name of the Python package", str),
              include_no_docstring:Param("Include symbols without docstrings?", store_true)=False,
-             verbose:Param("Turn on verbose logging?", store_false)=True,
-             output_file:Param("The output file", str)='filelist.md'
+             verbose:Param("Turn on verbose logging?", store_true)=False,
+             output_file:Param("The output file", str)='filelist.md',
                          ):
     "Generate a list of symbols corresponding to a python package in a markdown format."
     markdown_content = generate_markdown(package_name, include_no_docstring, verbose)
     Path(output_file).write_text(markdown_content)
-    print(f"Documentation generated in {output_file}")
+    if verbose: print(f"Documentation generated in {output_file}")
