@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>filelist – pysymbol-llm</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="pysymbol-llm">
+<meta property="og:site_name" content="pysymbol-llm">
+<meta name="twitter:title" content="pysymbol-llm">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">pysymbol-llm</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">pysymbol-llm</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./core.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">core</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#fastcore-module-documentation" id="toc-fastcore-module-documentation" class="nav-link active" data-scroll-target="#fastcore-module-documentation">fastcore Module Documentation</a>
+  <ul class="collapse">
+  <li><a href="#fastcore.basics" id="toc-fastcore.basics" class="nav-link" data-scroll-target="#fastcore.basics">fastcore.basics</a></li>
+  <li><a href="#fastcore.dispatch" id="toc-fastcore.dispatch" class="nav-link" data-scroll-target="#fastcore.dispatch">fastcore.dispatch</a></li>
+  <li><a href="#fastcore.docments" id="toc-fastcore.docments" class="nav-link" data-scroll-target="#fastcore.docments">fastcore.docments</a></li>
+  <li><a href="#fastcore.docscrape" id="toc-fastcore.docscrape" class="nav-link" data-scroll-target="#fastcore.docscrape">fastcore.docscrape</a></li>
+  <li><a href="#fastcore.foundation" id="toc-fastcore.foundation" class="nav-link" data-scroll-target="#fastcore.foundation">fastcore.foundation</a></li>
+  <li><a href="#fastcore.imghdr" id="toc-fastcore.imghdr" class="nav-link" data-scroll-target="#fastcore.imghdr">fastcore.imghdr</a></li>
+  <li><a href="#fastcore.imports" id="toc-fastcore.imports" class="nav-link" data-scroll-target="#fastcore.imports">fastcore.imports</a></li>
+  <li><a href="#fastcore.meta" id="toc-fastcore.meta" class="nav-link" data-scroll-target="#fastcore.meta">fastcore.meta</a></li>
+  <li><a href="#fastcore.net" id="toc-fastcore.net" class="nav-link" data-scroll-target="#fastcore.net">fastcore.net</a></li>
+  <li><a href="#fastcore.parallel" id="toc-fastcore.parallel" class="nav-link" data-scroll-target="#fastcore.parallel">fastcore.parallel</a></li>
+  <li><a href="#fastcore.py2pyi" id="toc-fastcore.py2pyi" class="nav-link" data-scroll-target="#fastcore.py2pyi">fastcore.py2pyi</a></li>
+  <li><a href="#fastcore.script" id="toc-fastcore.script" class="nav-link" data-scroll-target="#fastcore.script">fastcore.script</a></li>
+  <li><a href="#fastcore.style" id="toc-fastcore.style" class="nav-link" data-scroll-target="#fastcore.style">fastcore.style</a></li>
+  <li><a href="#fastcore.test" id="toc-fastcore.test" class="nav-link" data-scroll-target="#fastcore.test">fastcore.test</a></li>
+  <li><a href="#fastcore.transform" id="toc-fastcore.transform" class="nav-link" data-scroll-target="#fastcore.transform">fastcore.transform</a></li>
+  <li><a href="#fastcore.xdg" id="toc-fastcore.xdg" class="nav-link" data-scroll-target="#fastcore.xdg">fastcore.xdg</a></li>
+  <li><a href="#fastcore.xml" id="toc-fastcore.xml" class="nav-link" data-scroll-target="#fastcore.xml">fastcore.xml</a></li>
+  <li><a href="#fastcore.xtras" id="toc-fastcore.xtras" class="nav-link" data-scroll-target="#fastcore.xtras">fastcore.xtras</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/AnswerDotAI/pysymbol-llm/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="filelist-commonmark.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="fastcore-module-documentation" class="level1">
+<h1>fastcore Module Documentation</h1>
+<section id="fastcore.basics" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.basics">fastcore.basics</h2>
+<blockquote class="blockquote">
+<p>Basic functionality used in the fastai library</p>
+</blockquote>
+<ul>
+<li><p><code>def ifnone(a, b)</code> <code>b</code> if <code>a</code> is None else <code>a</code></p></li>
+<li><p><code>def maybe_attr(o, attr)</code> <code>getattr(o,attr,o)</code></p></li>
+<li><p><code>def basic_repr(flds)</code> Minimal <code>__repr__</code></p></li>
+<li><p><code>def is_array(x)</code> <code>True</code> if <code>x</code> supports <code>__array__</code> or <code>iloc</code></p></li>
+<li><p><code>def listify(o, *rest)</code> Convert <code>o</code> to a <code>list</code></p></li>
+<li><p><code>def tuplify(o, use_list, match)</code> Make <code>o</code> a tuple</p></li>
+<li><p><code>def true(x)</code> Test whether <code>x</code> is truthy; collections with &gt;0 elements are considered <code>True</code></p></li>
+<li><p><code>class NullType</code> An object that is <code>False</code> and can be called, chained, and indexed</p>
+<ul>
+<li><code>def __getattr__(self, *args)</code></li>
+<li><code>def __call__(self, *args, **kwargs)</code></li>
+<li><code>def __getitem__(self, *args)</code></li>
+<li><code>def __bool__(self)</code></li>
+</ul></li>
+<li><p><code>def tonull(x)</code> Convert <code>None</code> to <code>null</code></p></li>
+<li><p><code>def get_class(nm, *fld_names, **flds)</code> Dynamically create a class, optionally inheriting from <code>sup</code>, containing <code>fld_names</code></p></li>
+<li><p><code>def mk_class(nm, *fld_names, **flds)</code> Create a class using <code>get_class</code> and add to the caller’s module</p></li>
+<li><p><code>def wrap_class(nm, *fld_names, **flds)</code> Decorator: makes function a method of a new class <code>nm</code> passing parameters to <code>mk_class</code></p></li>
+<li><p><code>class ignore_exceptions</code> Context manager to ignore exceptions</p>
+<ul>
+<li><code>def __enter__(self)</code></li>
+<li><code>def __exit__(self, *args)</code></li>
+</ul></li>
+<li><p><code>def exec_local(code, var_name)</code> Call <code>exec</code> on <code>code</code> and return the var <code>var_name</code></p></li>
+<li><p><code>def risinstance(types, obj)</code> Curried <code>isinstance</code> but with args reversed</p></li>
+<li><p><code>class Inf</code> Infinite lists</p></li>
+<li><p><code>def in_(x, a)</code> <code>True</code> if <code>x in a</code></p></li>
+<li><p><code>def ret_true(*args, **kwargs)</code> Predicate: always <code>True</code></p></li>
+<li><p><code>def ret_false(*args, **kwargs)</code> Predicate: always <code>False</code></p></li>
+<li><p><code>def stop(e)</code> Raises exception <code>e</code> (by default <code>StopIteration</code>)</p></li>
+<li><p><code>def gen(func, seq, cond)</code> Like <code>(func(o) for o in seq if cond(func(o)))</code> but handles <code>StopIteration</code></p></li>
+<li><p><code>def chunked(it, chunk_sz, drop_last, n_chunks)</code> Return batches from iterator <code>it</code> of size <code>chunk_sz</code> (or return <code>n_chunks</code> total)</p></li>
+<li><p><code>def otherwise(x, tst, y)</code> <code>y if tst(x) else x</code></p></li>
+<li><p><code>def custom_dir(c, add)</code> Implement custom <code>__dir__</code>, adding <code>add</code> to <code>cls</code></p></li>
+<li><p><code>class AttrDict</code> <code>dict</code> subclass that also provides access to keys as attrs</p>
+<ul>
+<li><code>def __getattr__(self, k)</code></li>
+<li><code>def __setattr__(self, k, v)</code></li>
+<li><code>def __dir__(self)</code></li>
+<li><code>def copy(self)</code></li>
+</ul></li>
+<li><p><code>class AttrDictDefault</code> <code>AttrDict</code> subclass that returns <code>None</code> for missing attrs</p>
+<ul>
+<li><code>def __init__(self, *args, **kwargs)</code></li>
+<li><code>def __getattr__(self, k)</code></li>
+</ul></li>
+<li><p><code>class NS</code> <code>SimpleNamespace</code> subclass that also adds <code>iter</code> and <code>dict</code> support</p>
+<ul>
+<li><code>def __iter__(self)</code></li>
+<li><code>def __getitem__(self, x)</code></li>
+<li><code>def __setitem__(self, x, y)</code></li>
+</ul></li>
+<li><p><code>def get_annotations_ex(obj)</code> Backport of py3.10 <code>get_annotations</code> that returns globals/locals</p></li>
+<li><p><code>def eval_type(t, glb, loc)</code> <code>eval</code> a type or collection of types, if needed, for annotations in py3.10+</p></li>
+<li><p><code>def type_hints(f)</code> Like <code>typing.get_type_hints</code> but returns <code>{}</code> if not allowed type</p></li>
+<li><p><code>def annotations(o)</code> Annotations for <code>o</code>, or <code>type(o)</code></p></li>
+<li><p><code>def anno_ret(func)</code> Get the return annotation of <code>func</code></p></li>
+<li><p><code>def signature_ex(obj, eval_str)</code> Backport of <code>inspect.signature(..., eval_str=True</code> to &lt;py310</p></li>
+<li><p><code>def argnames(f, frame)</code> Names of arguments to function or frame <code>f</code></p></li>
+<li><p><code>def with_cast(f)</code> Decorator which uses any parameter annotations as preprocessing functions</p></li>
+<li><p><code>def store_attr(names, self, but, cast, store_args, **attrs)</code> Store params named in comma-separated <code>names</code> from calling context into attrs in <code>self</code></p></li>
+<li><p><code>def attrdict(o, *ks)</code> Dict from each <code>k</code> in <code>ks</code> to <code>getattr(o,k)</code></p></li>
+<li><p><code>def properties(cls, *ps)</code> Change attrs in <code>cls</code> with names in <code>ps</code> to properties</p></li>
+<li><p><code>def camel2words(s, space)</code> Convert CamelCase to ‘spaced words’</p></li>
+<li><p><code>def camel2snake(name)</code> Convert CamelCase to snake_case</p></li>
+<li><p><code>def snake2camel(s)</code> Convert snake_case to CamelCase</p></li>
+<li><p><code>def class2attr(self, cls_name)</code> Return the snake-cased name of the class; strip ending <code>cls_name</code> if it exists.</p></li>
+<li><p><code>def getcallable(o, attr)</code> Calls <code>getattr</code> with a default of <code>noop</code></p></li>
+<li><p><code>def getattrs(o, *attrs)</code> List of all <code>attrs</code> in <code>o</code></p></li>
+<li><p><code>def hasattrs(o, attrs)</code> Test whether <code>o</code> contains all <code>attrs</code></p></li>
+<li><p><code>def try_attrs(obj, *attrs)</code> Return first attr that exists in <code>obj</code></p></li>
+<li><p><code>class GetAttrBase</code> Basic delegation of <code>__getattr__</code> and <code>__dir__</code></p>
+<ul>
+<li><code>def __getattr__(self, k)</code></li>
+<li><code>def __dir__(self)</code></li>
+</ul></li>
+<li><p><code>class GetAttr</code> Inherit from this to have all attr accesses in <code>self._xtra</code> passed down to <code>self.default</code></p>
+<ul>
+<li><code>def __getattr__(self, k)</code></li>
+<li><code>def __dir__(self)</code></li>
+<li><code>def __setstate__(self, data)</code></li>
+</ul></li>
+<li><p><code>def delegate_attr(self, k, to)</code> Use in <code>__getattr__</code> to delegate to attr <code>to</code> without inheriting from <code>GetAttr</code></p></li>
+<li><p><code>class ShowPrint</code> Base class that prints for <code>show</code></p>
+<ul>
+<li><code>def show(self, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>class Int</code> An extensible <code>int</code></p></li>
+<li><p><code>class Str</code> An extensible <code>str</code></p></li>
+<li><p><code>class Float</code> An extensible <code>float</code></p></li>
+<li><p><code>def partition(coll, f)</code> Partition a collection by a predicate</p></li>
+<li><p><code>def flatten(o)</code> Concatenate all collections and items as a generator</p></li>
+<li><p><code>def concat(colls)</code> Concatenate all collections and items as a list</p></li>
+<li><p><code>def strcat(its, sep)</code> Concatenate stringified items <code>its</code></p></li>
+<li><p><code>def detuplify(x)</code> If <code>x</code> is a tuple with one thing, extract it</p></li>
+<li><p><code>def replicate(item, match)</code> Create tuple of <code>item</code> copied <code>len(match)</code> times</p></li>
+<li><p><code>def setify(o)</code> Turn any list like-object into a set.</p></li>
+<li><p><code>def merge(*ds)</code> Merge all dictionaries in <code>ds</code></p></li>
+<li><p><code>def range_of(x)</code> All indices of collection <code>x</code> (i.e.&nbsp;<code>list(range(len(x)))</code>)</p></li>
+<li><p><code>def groupby(x, key, val)</code> Like <code>itertools.groupby</code> but doesn’t need to be sorted, and isn’t lazy, plus some extensions</p></li>
+<li><p><code>def last_index(x, o)</code> Finds the last index of occurence of <code>x</code> in <code>o</code> (returns -1 if no occurence)</p></li>
+<li><p><code>def filter_dict(d, func)</code> Filter a <code>dict</code> using <code>func</code>, applied to keys and values</p></li>
+<li><p><code>def filter_keys(d, func)</code> Filter a <code>dict</code> using <code>func</code>, applied to keys</p></li>
+<li><p><code>def filter_values(d, func)</code> Filter a <code>dict</code> using <code>func</code>, applied to values</p></li>
+<li><p><code>def cycle(o)</code> Like <code>itertools.cycle</code> except creates list of <code>None</code>s if <code>o</code> is empty</p></li>
+<li><p><code>def zip_cycle(x, *args)</code> Like <code>itertools.zip_longest</code> but <code>cycle</code>s through elements of all but first argument</p></li>
+<li><p><code>def sorted_ex(iterable, key, reverse)</code> Like <code>sorted</code>, but if key is str use <code>attrgetter</code>; if int use <code>itemgetter</code></p></li>
+<li><p><code>def not_(f)</code> Create new function that negates result of <code>f</code></p></li>
+<li><p><code>def argwhere(iterable, f, negate, **kwargs)</code> Like <code>filter_ex</code>, but return indices for matching items</p></li>
+<li><p><code>def filter_ex(iterable, f, negate, gen, **kwargs)</code> Like <code>filter</code>, but passing <code>kwargs</code> to <code>f</code>, defaulting <code>f</code> to <code>noop</code>, and adding <code>negate</code> and <code>gen</code></p></li>
+<li><p><code>def renumerate(iterable, start)</code> Same as <code>enumerate</code>, but returns index as 2nd element instead of 1st</p></li>
+<li><p><code>def first(x, f, negate, **kwargs)</code> First element of <code>x</code>, optionally filtered by <code>f</code>, or None if missing</p></li>
+<li><p><code>def only(o)</code> Return the only item of <code>o</code>, raise if <code>o</code> doesn’t have exactly one item</p></li>
+<li><p><code>def nested_attr(o, attr, default)</code> Same as <code>getattr</code>, but if <code>attr</code> includes a <code>.</code>, then looks inside nested objects</p></li>
+<li><p><code>def nested_setdefault(o, attr, default)</code> Same as <code>setdefault</code>, but if <code>attr</code> includes a <code>.</code>, then looks inside nested objects</p></li>
+<li><p><code>def nested_callable(o, attr)</code> Same as <code>nested_attr</code> but if not found will return <code>noop</code></p></li>
+<li><p><code>def nested_idx(coll, *idxs)</code> Index into nested collections, dicts, etc, with <code>idxs</code></p></li>
+<li><p><code>def set_nested_idx(coll, value, *idxs)</code> Set value indexed like `nested_idx</p></li>
+<li><p><code>def val2idx(x)</code> Dict from value to index</p></li>
+<li><p><code>def uniqueify(x, sort, bidir, start)</code> Unique elements in <code>x</code>, optional <code>sort</code>, optional return reverse correspondence, optional prepend with elements.</p></li>
+<li><p><code>def loop_first_last(values)</code> Iterate and generate a tuple with a flag for first and last value.</p></li>
+<li><p><code>def loop_first(values)</code> Iterate and generate a tuple with a flag for first value.</p></li>
+<li><p><code>def loop_last(values)</code> Iterate and generate a tuple with a flag for last value.</p></li>
+<li><p><code>def first_match(lst, f, default)</code> First element of <code>lst</code> matching predicate <code>f</code>, or <code>default</code> if none</p></li>
+<li><p><code>def last_match(lst, f, default)</code> Last element of <code>lst</code> matching predicate <code>f</code>, or <code>default</code> if none</p></li>
+<li><p><code>class fastuple</code> A <code>tuple</code> with elementwise ops and more friendly <strong>init</strong> behavior</p>
+<ul>
+<li><p><code>def __new__(cls, x, *rest)</code></p></li>
+<li><p><code>def mul(self, *args)</code> <code>*</code> is already defined in <code>tuple</code> for replicating, so use <code>mul</code> instead</p></li>
+<li><p><code>def add(self, *args)</code> <code>+</code> is already defined in <code>tuple</code> for concat, so use <code>add</code> instead</p></li>
+</ul></li>
+<li><p><code>class bind</code> Same as <code>partial</code>, except you can use <code>arg0</code> <code>arg1</code> etc param placeholders</p>
+<ul>
+<li><code>def __init__(self, func, *pargs, **pkwargs)</code></li>
+<li><code>def __call__(self, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>def mapt(func, *iterables)</code> Tuplified <code>map</code></p></li>
+<li><p><code>def map_ex(iterable, f, *args, **kwargs)</code> Like <code>map</code>, but use <code>bind</code>, and supports <code>str</code> and indexing</p></li>
+<li><p><code>def compose(*funcs)</code> Create a function that composes all functions in <code>funcs</code>, passing along remaining <code>*args</code> and <code>**kwargs</code> to all</p></li>
+<li><p><code>def maps(*args)</code> Like <code>map</code>, except funcs are composed first</p></li>
+<li><p><code>def partialler(f, *args, **kwargs)</code> Like <code>functools.partial</code> but also copies over docstring</p></li>
+<li><p><code>def instantiate(t)</code> Instantiate <code>t</code> if it’s a type, otherwise do nothing</p></li>
+<li><p><code>def using_attr(f, attr)</code> Construct a function which applies <code>f</code> to the argument’s attribute <code>attr</code></p></li>
+<li><p><code>def copy_func(f)</code> Copy a non-builtin function (NB <code>copy.copy</code> does not work for this)</p></li>
+<li><p><code>def patch_to(cls, as_prop, cls_method)</code> Decorator: add <code>f</code> to <code>cls</code></p></li>
+<li><p><code>def patch(f)</code> Decorator: add <code>f</code> to the first parameter’s class (based on f’s type annotations)</p></li>
+<li><p><code>def patch_property(f)</code> Deprecated; use <code>patch(as_prop=True)</code> instead</p></li>
+<li><p><code>def compile_re(pat)</code> Compile <code>pat</code> if it’s not None</p></li>
+<li><p><code>class ImportEnum</code> An <code>Enum</code> that can have its values imported</p>
+<ul>
+<li><code>@classmethod def imports(cls)</code></li>
+<li><code>@property def name(self)</code></li>
+</ul></li>
+<li><p><code>class StrEnum</code> An <code>ImportEnum</code> that behaves like a <code>str</code></p>
+<ul>
+<li><code>def __str__(self)</code></li>
+<li><code>@property def name(self)</code></li>
+</ul></li>
+<li><p><code>def str_enum(name, *vals)</code> Simplified creation of <code>StrEnum</code> types</p></li>
+<li><p><code>class ValEnum</code> An <code>ImportEnum</code> that stringifies using values</p>
+<ul>
+<li><code>def __str__(self)</code></li>
+<li><code>@property def name(self)</code></li>
+</ul></li>
+<li><p><code>class Stateful</code> A base class/mixin for objects that should not serialize all their state</p>
+<ul>
+<li><code>def __init__(self, *args, **kwargs)</code></li>
+<li><code>def __getstate__(self)</code></li>
+<li><code>def __setstate__(self, state)</code></li>
+</ul></li>
+<li><p><code>class NotStr</code> Behaves like a <code>str</code>, but isn’t an instance of one</p>
+<ul>
+<li><code>def __init__(self, s)</code></li>
+<li><code>def __repr__(self)</code></li>
+<li><code>def __str__(self)</code></li>
+<li><code>def __add__(self, b)</code></li>
+<li><code>def __mul__(self, b)</code></li>
+<li><code>def __len__(self)</code></li>
+<li><code>def __eq__(self, b)</code></li>
+<li><code>def __lt__(self, b)</code></li>
+<li><code>def __hash__(self)</code></li>
+<li><code>def __bool__(self)</code></li>
+<li><code>def __contains__(self, b)</code></li>
+<li><code>def __iter__(self)</code></li>
+</ul></li>
+<li><p><code>class PrettyString</code> Little hack to get strings to show properly in Jupyter.</p>
+<ul>
+<li><code>def __repr__(self)</code></li>
+</ul></li>
+<li><p><code>def even_mults(start, stop, n)</code> Build log-stepped array from <code>start</code> to <code>stop</code> in <code>n</code> steps.</p></li>
+<li><p><code>def num_cpus()</code> Get number of cpus</p></li>
+<li><p><code>def add_props(f, g, n)</code> Create properties passing each of <code>range(n)</code> to f</p></li>
+<li><p><code>def typed(f)</code> Decorator to check param and return types at runtime</p></li>
+<li><p><code>def exec_new(code)</code> Execute <code>code</code> in a new environment and return it</p></li>
+<li><p><code>def exec_import(mod, sym)</code> Import <code>sym</code> from <code>mod</code> in a new environment</p></li>
+<li><p><code>def str2bool(s)</code> Case-insensitive convert string <code>s</code> too a bool (<code>y</code>,<code>yes</code>,<code>t</code>,<code>true</code>,<code>on</code>,<code>1</code>-&gt;<code>True</code>)</p></li>
+</ul>
+</section>
+<section id="fastcore.dispatch" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.dispatch">fastcore.dispatch</h2>
+<blockquote class="blockquote">
+<p>Basic single and dual parameter dispatch</p>
+</blockquote>
+<ul>
+<li><p><code>def lenient_issubclass(cls, types)</code> If possible return whether <code>cls</code> is a subclass of <code>types</code>, otherwise return False.</p></li>
+<li><p><code>def sorted_topologically(iterable)</code> Return a new list containing all items from the iterable sorted topologically</p></li>
+<li><p><code>class TypeDispatch</code> Dictionary-like object; <code>__getitem__</code> matches keys of types using <code>issubclass</code></p>
+<ul>
+<li><p><code>def __init__(self, funcs, bases)</code></p></li>
+<li><p><code>def add(self, f)</code> Add type <code>t</code> and function <code>f</code></p></li>
+<li><p><code>def first(self)</code> Get first function in ordered dict of type:func.</p></li>
+<li><p><code>def returns(self, x)</code> Get the return type of annotation of <code>x</code>.</p></li>
+<li><p><code>def __repr__(self)</code></p></li>
+<li><p><code>def __call__(self, *args, **kwargs)</code></p></li>
+<li><p><code>def __get__(self, inst, owner)</code></p></li>
+<li><p><code>def __getitem__(self, k)</code> Find first matching type that is a super-class of <code>k</code></p></li>
+</ul></li>
+<li><p><code>class DispatchReg</code> A global registry for <code>TypeDispatch</code> objects keyed by function name</p>
+<ul>
+<li><code>def __init__(self)</code></li>
+<li><code>def __call__(self, f)</code></li>
+</ul></li>
+<li><p><code>def retain_meta(x, res, as_copy)</code> Call <code>res.set_meta(x)</code>, if it exists</p></li>
+<li><p><code>def default_set_meta(self, x, as_copy)</code> Copy over <code>_meta</code> from <code>x</code> to <code>res</code>, if it’s missing</p></li>
+<li><p><code>@typedispatch def cast(x, typ)</code> cast <code>x</code> to type <code>typ</code> (may also change <code>x</code> inplace)</p></li>
+<li><p><code>def retain_type(new, old, typ, as_copy)</code> Cast <code>new</code> to type of <code>old</code> or <code>typ</code> if it’s a superclass</p></li>
+<li><p><code>def retain_types(new, old, typs)</code> Cast each item of <code>new</code> to type of matching item in <code>old</code> if it’s a superclass</p></li>
+<li><p><code>def explode_types(o)</code> Return the type of <code>o</code>, potentially in nested dictionaries for thing that are listy</p></li>
+</ul>
+</section>
+<section id="fastcore.docments" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.docments">fastcore.docments</h2>
+<blockquote class="blockquote">
+<p>Document parameters using comments.</p>
+</blockquote>
+<ul>
+<li><p><code>def docstring(sym)</code> Get docstring for <code>sym</code> for functions ad classes</p></li>
+<li><p><code>def parse_docstring(sym)</code> Parse a numpy-style docstring in <code>sym</code></p></li>
+<li><p><code>def isdataclass(s)</code> Check if <code>s</code> is a dataclass but not a dataclass’ instance</p></li>
+<li><p><code>def get_dataclass_source(s)</code> Get source code for dataclass <code>s</code></p></li>
+<li><p><code>def get_source(s)</code> Get source code for string, function object or dataclass <code>s</code></p></li>
+<li><p><code>def get_name(obj)</code> Get the name of <code>obj</code></p></li>
+<li><p><code>def qual_name(obj)</code> Get the qualified name of <code>obj</code></p></li>
+<li><p><code>@delegates(_docments) def docments(elt, full, **kwargs)</code> Generates a <code>docment</code></p></li>
+<li><p><code>def extract_docstrings(code)</code> Create a dict from function/class/method names to tuples of docstrings and param lists</p></li>
+</ul>
+</section>
+<section id="fastcore.docscrape" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.docscrape">fastcore.docscrape</h2>
+<blockquote class="blockquote">
+<p>Parse numpy-style docstrings</p>
+</blockquote>
+<ul>
+<li><p><code>def strip_blank_lines(l)</code> Remove leading and trailing blank lines from a list of lines</p></li>
+<li><p><code>class Reader</code> A line-based string reader.</p>
+<ul>
+<li><code>def __init__(self, data)</code></li>
+<li><code>def __getitem__(self, n)</code></li>
+<li><code>def reset(self)</code></li>
+<li><code>def read(self)</code></li>
+<li><code>def seek_next_non_empty_line(self)</code></li>
+<li><code>def eof(self)</code></li>
+<li><code>def read_to_condition(self, condition_func)</code></li>
+<li><code>def read_to_next_empty_line(self)</code></li>
+<li><code>def read_to_next_unindented_line(self)</code></li>
+<li><code>def peek(self, n)</code></li>
+<li><code>def is_empty(self)</code></li>
+</ul></li>
+<li><p><code>class ParseError</code></p>
+<ul>
+<li><code>def __str__(self)</code></li>
+</ul></li>
+<li><p><code>class NumpyDocString</code> Parses a numpydoc string to an abstract representation</p>
+<ul>
+<li><code>def __init__(self, docstring, config)</code></li>
+<li><code>def __iter__(self)</code></li>
+<li><code>def __len__(self)</code></li>
+<li><code>def __getitem__(self, key)</code></li>
+<li><code>def __setitem__(self, key, val)</code></li>
+</ul></li>
+<li><p><code>def dedent_lines(lines, split)</code> Deindent a list of lines maximally</p></li>
+</ul>
+</section>
+<section id="fastcore.foundation" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.foundation">fastcore.foundation</h2>
+<blockquote class="blockquote">
+<p>The <code>L</code> class and helpers for it</p>
+</blockquote>
+<ul>
+<li><p><code>@contextmanager def working_directory(path)</code> Change working directory to <code>path</code> and return to previous on exit.</p></li>
+<li><p><code>def add_docs(cls, cls_doc, **docs)</code> Copy values from <code>docs</code> to <code>cls</code> docstrings, and confirm all public methods are documented</p></li>
+<li><p><code>def docs(cls)</code> Decorator version of <code>add_docs</code>, using <code>_docs</code> dict</p></li>
+<li><p><code>def coll_repr(c, max_n)</code> String repr of up to <code>max_n</code> items of (possibly lazy) collection <code>c</code></p></li>
+<li><p><code>def is_bool(x)</code> Check whether <code>x</code> is a bool or None</p></li>
+<li><p><code>def mask2idxs(mask)</code> Convert bool mask or index list to index <code>L</code></p></li>
+<li><p><code>def is_indexer(idx)</code> Test whether <code>idx</code> will index a single item in a list</p></li>
+<li><p><code>class CollBase</code> Base class for composing a list of <code>items</code></p>
+<ul>
+<li><code>def __init__(self, items)</code></li>
+<li><code>def __len__(self)</code></li>
+<li><code>def __getitem__(self, k)</code></li>
+<li><code>def __setitem__(self, k, v)</code></li>
+<li><code>def __delitem__(self, i)</code></li>
+<li><code>def __repr__(self)</code></li>
+<li><code>def __iter__(self)</code></li>
+</ul></li>
+<li><p><code>class L</code> Behaves like a list of <code>items</code> but can also index with list of indices or masks</p>
+<ul>
+<li><p><code>def __init__(self, items, *rest)</code></p></li>
+<li><p><code>def __getitem__(self, idx)</code></p></li>
+<li><p><code>def copy(self)</code></p></li>
+<li><p><code>def __setitem__(self, idx, o)</code> Set <code>idx</code> (can be list of indices, or mask, or int) items to <code>o</code> (which is broadcast if not iterable)</p></li>
+<li><p><code>def __eq__(self, b)</code></p></li>
+<li><p><code>def sorted(self, key, reverse)</code></p></li>
+<li><p><code>def __iter__(self)</code></p></li>
+<li><p><code>def __contains__(self, b)</code></p></li>
+<li><p><code>def __reversed__(self)</code></p></li>
+<li><p><code>def __invert__(self)</code></p></li>
+<li><p><code>def __repr__(self)</code></p></li>
+<li><p><code>def __mul__(a, b)</code></p></li>
+<li><p><code>def __add__(a, b)</code></p></li>
+<li><p><code>def __radd__(a, b)</code></p></li>
+<li><p><code>def __addi__(a, b)</code></p></li>
+<li><p><code>@classmethod def split(cls, s, sep, maxsplit)</code></p></li>
+<li><p><code>@classmethod def range(cls, a, b, step)</code></p></li>
+<li><p><code>def map(self, f, *args, **kwargs)</code></p></li>
+<li><p><code>def argwhere(self, f, negate, **kwargs)</code></p></li>
+<li><p><code>def argfirst(self, f, negate)</code></p></li>
+<li><p><code>def filter(self, f, negate, **kwargs)</code></p></li>
+<li><p><code>def enumerate(self)</code></p></li>
+<li><p><code>def renumerate(self)</code></p></li>
+<li><p><code>def unique(self, sort, bidir, start)</code></p></li>
+<li><p><code>def val2idx(self)</code></p></li>
+<li><p><code>def cycle(self)</code></p></li>
+<li><p><code>def map_dict(self, f, *args, **kwargs)</code></p></li>
+<li><p><code>def map_first(self, f, g, *args, **kwargs)</code></p></li>
+<li><p><code>def itemgot(self, *idxs)</code></p></li>
+<li><p><code>def attrgot(self, k, default)</code></p></li>
+<li><p><code>def starmap(self, f, *args, **kwargs)</code></p></li>
+<li><p><code>def zip(self, cycled)</code></p></li>
+<li><p><code>def zipwith(self, *rest)</code></p></li>
+<li><p><code>def map_zip(self, f, *args, **kwargs)</code></p></li>
+<li><p><code>def map_zipwith(self, f, *rest, **kwargs)</code></p></li>
+<li><p><code>def shuffle(self)</code></p></li>
+<li><p><code>def concat(self)</code></p></li>
+<li><p><code>def reduce(self, f, initial)</code></p></li>
+<li><p><code>def sum(self)</code></p></li>
+<li><p><code>def product(self)</code></p></li>
+<li><p><code>def setattrs(self, attr, val)</code></p></li>
+</ul></li>
+<li><p><code>def save_config_file(file, d, **kwargs)</code> Write settings dict to a new config file, or overwrite the existing one.</p></li>
+<li><p><code>class Config</code> Reading and writing <code>ConfigParser</code> ini files</p>
+<ul>
+<li><code>def __init__(self, cfg_path, cfg_name, create, save, extra_files, types)</code></li>
+<li><code>def __repr__(self)</code></li>
+<li><code>def __setitem__(self, k, v)</code></li>
+<li><code>def __contains__(self, k)</code></li>
+<li><code>def save(self)</code></li>
+<li><code>def __getattr__(self, k)</code></li>
+<li><code>def __getitem__(self, k)</code></li>
+<li><code>def get(self, k, default)</code></li>
+<li><code>def path(self, k, default)</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="fastcore.imghdr" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.imghdr">fastcore.imghdr</h2>
+<blockquote class="blockquote">
+<p>Recognize image file formats based on their first few bytes.</p>
+</blockquote>
+<ul>
+<li><p><code>def test_jpeg(h, f)</code> JPEG data with JFIF or Exif markers; and raw JPEG</p></li>
+<li><p><code>def test_gif(h, f)</code> GIF (’87 and ’89 variants)</p></li>
+<li><p><code>def test_tiff(h, f)</code> TIFF (can be in Motorola or Intel byte order)</p></li>
+<li><p><code>def test_rgb(h, f)</code> SGI image library</p></li>
+<li><p><code>def test_pbm(h, f)</code> PBM (portable bitmap)</p></li>
+<li><p><code>def test_pgm(h, f)</code> PGM (portable graymap)</p></li>
+<li><p><code>def test_ppm(h, f)</code> PPM (portable pixmap)</p></li>
+<li><p><code>def test_rast(h, f)</code> Sun raster file</p></li>
+<li><p><code>def test_xbm(h, f)</code> X bitmap (X10 or X11)</p></li>
+</ul>
+</section>
+<section id="fastcore.imports" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.imports">fastcore.imports</h2>
+<ul>
+<li><p><code>def is_iter(o)</code> Test whether <code>o</code> can be used in a <code>for</code> loop</p></li>
+<li><p><code>def is_coll(o)</code> Test whether <code>o</code> is a collection (i.e.&nbsp;has a usable <code>len</code>)</p></li>
+<li><p><code>def all_equal(a, b)</code> Compares whether <code>a</code> and <code>b</code> are the same length and have the same contents</p></li>
+<li><p><code>def noop(x, *args, **kwargs)</code> Do nothing</p></li>
+<li><p><code>def noops(self, x, *args, **kwargs)</code> Do nothing (method)</p></li>
+<li><p><code>def isinstance_str(x, cls_name)</code> Like <code>isinstance</code>, except takes a type name instead of a type</p></li>
+<li><p><code>def equals(a, b)</code> Compares <code>a</code> and <code>b</code> for equality; supports sublists, tensors and arrays too</p></li>
+<li><p><code>def ipython_shell()</code> Same as <code>get_ipython</code> but returns <code>False</code> if not in IPython</p></li>
+<li><p><code>def in_ipython()</code> Check if code is running in some kind of IPython environment</p></li>
+<li><p><code>def in_colab()</code> Check if the code is running in Google Colaboratory</p></li>
+<li><p><code>def in_jupyter()</code> Check if the code is running in a jupyter notebook</p></li>
+<li><p><code>def in_notebook()</code> Check if the code is running in a jupyter notebook</p></li>
+<li><p><code>def remove_prefix(text, prefix)</code> Temporary until py39 is a prereq</p></li>
+<li><p><code>def remove_suffix(text, suffix)</code> Temporary until py39 is a prereq</p></li>
+</ul>
+</section>
+<section id="fastcore.meta" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.meta">fastcore.meta</h2>
+<blockquote class="blockquote">
+<p>Metaclasses</p>
+</blockquote>
+<ul>
+<li><p><code>def test_sig(f, b)</code> Test the signature of an object</p></li>
+<li><p><code>class FixSigMeta</code> A metaclass that fixes the signature on classes that override <code>__new__</code></p>
+<ul>
+<li><code>def __new__(cls, name, bases, dict)</code></li>
+</ul></li>
+<li><p><code>class PrePostInitMeta</code> A metaclass that calls optional <code>__pre_init__</code> and <code>__post_init__</code> methods</p>
+<ul>
+<li><code>def __call__(cls, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>class AutoInit</code> Same as <code>object</code>, but no need for subclasses to call <code>super().__init__</code></p>
+<ul>
+<li><code>def __pre_init__(self, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>class NewChkMeta</code> Metaclass to avoid recreating object passed to constructor</p>
+<ul>
+<li><code>def __call__(cls, x, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>class BypassNewMeta</code> Metaclass: casts <code>x</code> to this class if it’s of type <code>cls._bypass_type</code></p>
+<ul>
+<li><code>def __call__(cls, x, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>def empty2none(p)</code> Replace <code>Parameter.empty</code> with <code>None</code></p></li>
+<li><p><code>def anno_dict(f)</code> <code>__annotation__ dictionary with</code>empty<code>cast to</code>None`, returning empty if doesn’t exist</p></li>
+<li><p><code>def use_kwargs_dict(keep, **kwargs)</code> Decorator: replace <code>**kwargs</code> in signature with <code>names</code> params</p></li>
+<li><p><code>def use_kwargs(names, keep)</code> Decorator: replace <code>**kwargs</code> in signature with <code>names</code> params</p></li>
+<li><p><code>def delegates(to, keep, but)</code> Decorator: replace <code>**kwargs</code> in signature with params from <code>to</code></p></li>
+<li><p><code>def method(f)</code> Mark <code>f</code> as a method</p></li>
+<li><p><code>def funcs_kwargs(as_method)</code> Replace methods in <code>cls._methods</code> with those from <code>kwargs</code></p></li>
+</ul>
+</section>
+<section id="fastcore.net" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.net">fastcore.net</h2>
+<blockquote class="blockquote">
+<p>Network, HTTP, and URL functions</p>
+</blockquote>
+<ul>
+<li><p><code>def urlquote(url)</code> Update url’s path with <code>urllib.parse.quote</code></p></li>
+<li><p><code>def urlwrap(url, data, headers)</code> Wrap <code>url</code> in a urllib <code>Request</code> with <code>urlquote</code></p></li>
+<li><p><code>class HTTP4xxClientError</code> Base class for client exceptions (code 4xx) from <code>url*</code> functions</p></li>
+<li><p><code>class HTTP5xxServerError</code> Base class for server exceptions (code 5xx) from <code>url*</code> functions</p></li>
+<li><p><code>def urlopen(url, data, headers, timeout, **kwargs)</code> Like <code>urllib.request.urlopen</code>, but first <code>urlwrap</code> the <code>url</code>, and encode <code>data</code></p></li>
+<li><p><code>def urlread(url, data, headers, decode, return_json, return_headers, timeout, **kwargs)</code> Retrieve <code>url</code>, using <code>data</code> dict or <code>kwargs</code> to <code>POST</code> if present</p></li>
+<li><p><code>def urljson(url, data, timeout)</code> Retrieve <code>url</code> and decode json</p></li>
+<li><p><code>def urlclean(url)</code> Remove fragment, params, and querystring from <code>url</code> if present</p></li>
+<li><p><code>def urlsave(url, dest, reporthook, headers, timeout)</code> Retrieve <code>url</code> and save based on its name</p></li>
+<li><p><code>def urlvalid(x)</code> Test if <code>x</code> is a valid URL</p></li>
+<li><p><code>def urlrequest(url, verb, headers, route, query, data, json_data)</code> <code>Request</code> for <code>url</code> with optional route params replaced by <code>route</code>, plus <code>query</code> string, and post <code>data</code></p></li>
+<li><p><code>@patch def summary(self, skip)</code> Summary containing full_url, headers, method, and data, removing <code>skip</code> from headers</p></li>
+<li><p><code>def urlsend(url, verb, headers, decode, route, query, data, json_data, return_json, return_headers, debug, timeout)</code> Send request with <code>urlrequest</code>, converting result to json if <code>return_json</code></p></li>
+<li><p><code>def do_request(url, post, headers, **data)</code> Call GET or json-encoded POST on <code>url</code>, depending on <code>post</code></p></li>
+<li><p><code>def start_server(port, host, dgram, reuse_addr, n_queue)</code> Create a <code>socket</code> server on <code>port</code>, with optional <code>host</code>, of type <code>dgram</code></p></li>
+<li><p><code>def start_client(port, host, dgram)</code> Create a <code>socket</code> client on <code>port</code>, with optional <code>host</code>, of type <code>dgram</code></p></li>
+<li><p><code>def tobytes(s)</code> Convert <code>s</code> into HTTP-ready bytes format</p></li>
+<li><p><code>def http_response(body, status, hdrs, **kwargs)</code> Create an HTTP-ready response, adding <code>kwargs</code> to <code>hdrs</code></p></li>
+<li><p><code>@threaded def recv_once(host, port)</code> Spawn a thread to receive a single HTTP request and store in <code>d['r']</code></p></li>
+</ul>
+</section>
+<section id="fastcore.parallel" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.parallel">fastcore.parallel</h2>
+<blockquote class="blockquote">
+<p>Threading and multiprocessing functions</p>
+</blockquote>
+<ul>
+<li><p><code>def threaded(process)</code> Run <code>f</code> in a <code>Thread</code> (or <code>Process</code> if <code>process=True</code>), and returns it</p></li>
+<li><p><code>def startthread(f)</code> Like <code>threaded</code>, but start thread immediately</p></li>
+<li><p><code>def startproc(f)</code> Like <code>threaded(True)</code>, but start Process immediately</p></li>
+<li><p><code>class ThreadPoolExecutor</code> Same as Python’s ThreadPoolExecutor, except can pass <code>max_workers==0</code> for serial execution</p>
+<ul>
+<li><code>def __init__(self, max_workers, on_exc, pause, **kwargs)</code></li>
+<li><code>def map(self, f, items, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>@delegates() class ProcessPoolExecutor</code> Same as Python’s ProcessPoolExecutor, except can pass <code>max_workers==0</code> for serial execution</p>
+<ul>
+<li><code>def __init__(self, max_workers, on_exc, pause, **kwargs)</code></li>
+<li><code>def map(self, f, items, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>def parallel(f, items, *args, **kwargs)</code> Applies <code>func</code> in parallel to <code>items</code>, using <code>n_workers</code></p></li>
+<li><p><code>def run_procs(f, f_done, args)</code> Call <code>f</code> for each item in <code>args</code> in parallel, yielding <code>f_done</code></p></li>
+<li><p><code>def parallel_gen(cls, items, n_workers, **kwargs)</code> Instantiate <code>cls</code> in <code>n_workers</code> procs &amp; call each on a subset of <code>items</code> in parallel.</p></li>
+</ul>
+</section>
+<section id="fastcore.py2pyi" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.py2pyi">fastcore.py2pyi</h2>
+<ul>
+<li><p><code>def imp_mod(module_path, package)</code> Import dynamically the module referenced in <code>fn</code></p></li>
+<li><p><code>def has_deco(node, name)</code> Check if a function node <code>node</code> has a decorator named <code>name</code></p></li>
+<li><p><code>def create_pyi(fn, package)</code> Convert <code>fname.py</code> to <code>fname.pyi</code> by removing function bodies and expanding <code>delegates</code> kwargs</p></li>
+<li><p><code>@call_parse def py2pyi(fname, package)</code> Convert <code>fname.py</code> to <code>fname.pyi</code> by removing function bodies and expanding <code>delegates</code> kwargs</p></li>
+<li><p><code>@call_parse def replace_wildcards(path)</code> Expand wildcard imports in the specified Python file.</p></li>
+</ul>
+</section>
+<section id="fastcore.script" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.script">fastcore.script</h2>
+<blockquote class="blockquote">
+<p>A fast way to turn your python function into a script.</p>
+</blockquote>
+<ul>
+<li><p><code>def store_true()</code> Placeholder to pass to <code>Param</code> for <code>store_true</code> action</p></li>
+<li><p><code>def store_false()</code> Placeholder to pass to <code>Param</code> for <code>store_false</code> action</p></li>
+<li><p><code>def bool_arg(v)</code> Use as <code>type</code> for <code>Param</code> to get <code>bool</code> behavior</p></li>
+<li><p><code>class Param</code> A parameter in a function used in <code>anno_parser</code> or <code>call_parse</code></p>
+<ul>
+<li><code>def __init__(self, help, type, opt, action, nargs, const, choices, required, default)</code></li>
+<li><code>def set_default(self, d)</code></li>
+<li><code>@property def pre(self)</code></li>
+<li><code>@property def kwargs(self)</code></li>
+<li><code>def __repr__(self)</code></li>
+</ul></li>
+<li><p><code>def anno_parser(func, prog)</code> Look at params (annotated with <code>Param</code>) in func and return an <code>ArgumentParser</code></p></li>
+<li><p><code>def args_from_prog(func, prog)</code> Extract args from <code>prog</code></p></li>
+<li><p><code>def call_parse(func, nested)</code> Decorator to create a simple CLI from <code>func</code> using <code>anno_parser</code></p></li>
+</ul>
+</section>
+<section id="fastcore.style" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.style">fastcore.style</h2>
+<blockquote class="blockquote">
+<p>Fast styling for friendly CLIs.</p>
+</blockquote>
+<ul>
+<li><p><code>class StyleCode</code> An escape sequence for styling terminal text.</p>
+<ul>
+<li><code>def __init__(self, name, code, typ)</code></li>
+<li><code>def __str__(self)</code></li>
+</ul></li>
+<li><p><code>class Style</code> A minimal terminal text styler.</p>
+<ul>
+<li><code>def __init__(self, codes)</code></li>
+<li><code>def __dir__(self)</code></li>
+<li><code>def __getattr__(self, k)</code></li>
+<li><code>def __call__(self, obj)</code></li>
+<li><code>def __repr__(self)</code></li>
+</ul></li>
+<li><p><code>def demo()</code> Demonstrate all available styles and their codes.</p></li>
+</ul>
+</section>
+<section id="fastcore.test" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.test">fastcore.test</h2>
+<blockquote class="blockquote">
+<p>Helper functions to quickly write tests in notebooks</p>
+</blockquote>
+<ul>
+<li><p><code>def test_fail(f, msg, contains, args, kwargs)</code> Fails with <code>msg</code> unless <code>f()</code> raises an exception and (optionally) has <code>contains</code> in <code>e.args</code></p></li>
+<li><p><code>def test(a, b, cmp, cname)</code> <code>assert</code> that <code>cmp(a,b)</code>; display inputs and <code>cname or cmp.__name__</code> if it fails</p></li>
+<li><p><code>def nequals(a, b)</code> Compares <code>a</code> and <code>b</code> for <code>not equals</code></p></li>
+<li><p><code>def test_eq(a, b)</code> <code>test</code> that <code>a==b</code></p></li>
+<li><p><code>def test_eq_type(a, b)</code> <code>test</code> that <code>a==b</code> and are same type</p></li>
+<li><p><code>def test_ne(a, b)</code> <code>test</code> that <code>a!=b</code></p></li>
+<li><p><code>def is_close(a, b, eps)</code> Is <code>a</code> within <code>eps</code> of <code>b</code></p></li>
+<li><p><code>def test_close(a, b, eps)</code> <code>test</code> that <code>a</code> is within <code>eps</code> of <code>b</code></p></li>
+<li><p><code>def test_is(a, b)</code> <code>test</code> that <code>a is b</code></p></li>
+<li><p><code>def test_shuffled(a, b)</code> <code>test</code> that <code>a</code> and <code>b</code> are shuffled versions of the same sequence of items</p></li>
+<li><p><code>def test_stdout(f, exp, regex)</code> Test that <code>f</code> prints <code>exp</code> to stdout, optionally checking as <code>regex</code></p></li>
+<li><p><code>def test_fig_exists(ax)</code> Test there is a figure displayed in <code>ax</code></p></li>
+<li><p><code>class ExceptionExpected</code> Context manager that tests if an exception is raised</p>
+<ul>
+<li><code>def __init__(self, ex, regex)</code></li>
+<li><code>def __enter__(self)</code></li>
+<li><code>def __exit__(self, type, value, traceback)</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="fastcore.transform" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.transform">fastcore.transform</h2>
+<blockquote class="blockquote">
+<p>Definition of <code>Transform</code> and <code>Pipeline</code></p>
+</blockquote>
+<ul>
+<li><p><code>class Transform</code> Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
+<ul>
+<li><code>def __init__(self, enc, dec, split_idx, order)</code></li>
+<li><code>@property def name(self)</code></li>
+<li><code>def __call__(self, x, **kwargs)</code></li>
+<li><code>def decode(self, x, **kwargs)</code></li>
+<li><code>def __repr__(self)</code></li>
+<li><code>def setup(self, items, train_setup)</code></li>
+</ul></li>
+<li><p><code>class InplaceTransform</code> A <code>Transform</code> that modifies in-place and just returns whatever it’s passed</p></li>
+<li><p><code>class DisplayedTransform</code> A transform with a <code>__repr__</code> that shows its attrs</p>
+<ul>
+<li><code>@property def name(self)</code></li>
+</ul></li>
+<li><p><code>class ItemTransform</code> A transform that always take tuples as items</p>
+<ul>
+<li><code>def __call__(self, x, **kwargs)</code></li>
+<li><code>def decode(self, x, **kwargs)</code></li>
+</ul></li>
+<li><p><code>def get_func(t, name, *args, **kwargs)</code> Get the <code>t.name</code> (potentially partial-ized with <code>args</code> and <code>kwargs</code>) or <code>noop</code> if not defined</p></li>
+<li><p><code>class Func</code> Basic wrapper around a <code>name</code> with <code>args</code> and <code>kwargs</code> to call on a given type</p>
+<ul>
+<li><code>def __init__(self, name, *args, **kwargs)</code></li>
+<li><code>def __repr__(self)</code></li>
+<li><code>def __call__(self, t)</code></li>
+</ul></li>
+<li><p><code>def compose_tfms(x, tfms, is_enc, reverse, **kwargs)</code> Apply all <code>func_nm</code> attribute of <code>tfms</code> on <code>x</code>, maybe in <code>reverse</code> order</p></li>
+<li><p><code>def mk_transform(f)</code> Convert function <code>f</code> to <code>Transform</code> if it isn’t already one</p></li>
+<li><p><code>def gather_attrs(o, k, nm)</code> Used in <strong>getattr</strong> to collect all attrs <code>k</code> from <code>self.{nm}</code></p></li>
+<li><p><code>def gather_attr_names(o, nm)</code> Used in <strong>dir</strong> to collect all attrs <code>k</code> from <code>self.{nm}</code></p></li>
+<li><p><code>class Pipeline</code> A pipeline of composed (for encode/decode) transforms, setup with types</p>
+<ul>
+<li><code>def __init__(self, funcs, split_idx)</code></li>
+<li><code>def setup(self, items, train_setup)</code></li>
+<li><code>def add(self, ts, items, train_setup)</code></li>
+<li><code>def __call__(self, o)</code></li>
+<li><code>def __repr__(self)</code></li>
+<li><code>def __getitem__(self, i)</code></li>
+<li><code>def __setstate__(self, data)</code></li>
+<li><code>def __getattr__(self, k)</code></li>
+<li><code>def __dir__(self)</code></li>
+<li><code>def decode(self, o, full)</code></li>
+<li><code>def show(self, o, ctx, **kwargs)</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="fastcore.xdg" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.xdg">fastcore.xdg</h2>
+<blockquote class="blockquote">
+<p>XDG Base Directory Specification helpers.</p>
+</blockquote>
+<ul>
+<li><p><code>def xdg_cache_home()</code> Path corresponding to <code>XDG_CACHE_HOME</code></p></li>
+<li><p><code>def xdg_config_dirs()</code> Paths corresponding to <code>XDG_CONFIG_DIRS</code></p></li>
+<li><p><code>def xdg_config_home()</code> Path corresponding to <code>XDG_CONFIG_HOME</code></p></li>
+<li><p><code>def xdg_data_dirs()</code> Paths corresponding to XDG_DATA_DIRS`</p></li>
+<li><p><code>def xdg_data_home()</code> Path corresponding to <code>XDG_DATA_HOME</code></p></li>
+<li><p><code>def xdg_runtime_dir()</code> Path corresponding to <code>XDG_RUNTIME_DIR</code></p></li>
+<li><p><code>def xdg_state_home()</code> Path corresponding to <code>XDG_STATE_HOME</code></p></li>
+</ul>
+</section>
+<section id="fastcore.xml" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.xml">fastcore.xml</h2>
+<blockquote class="blockquote">
+<p>Concise generation of XML.</p>
+</blockquote>
+<ul>
+<li><p><code>class FT</code> A ‘Fast Tag’ structure, containing <code>tag</code>,<code>children</code>,and <code>attrs</code></p>
+<ul>
+<li><code>def __init__(self, tag, cs, attrs, void_, **kwargs)</code></li>
+<li><code>def __setattr__(self, k, v)</code></li>
+<li><code>def __getattr__(self, k)</code></li>
+<li><code>@property def list(self)</code></li>
+<li><code>def get(self, k, default)</code></li>
+<li><code>def __repr__(self)</code></li>
+<li><code>def __add__(self, b)</code></li>
+<li><code>def __getitem__(self, idx)</code></li>
+<li><code>def __iter__(self)</code></li>
+</ul></li>
+<li><p><code>def ft(tag, *c, **kw)</code> Create an <code>FT</code> structure for <code>to_xml()</code></p></li>
+<li><p><code>def Html(*c, **kwargs)</code> An HTML tag, optionally preceeded by <code>!DOCTYPE HTML</code></p></li>
+<li><p><code>class Safe</code></p>
+<ul>
+<li><code>def __html__(self)</code></li>
+</ul></li>
+<li><p><code>def to_xml(elm, lvl, indent, do_escape)</code> Convert <code>ft</code> element tree into an XML string</p></li>
+<li><p><code>def highlight(s, lang)</code> Markdown to syntax-highlight <code>s</code> in language <code>lang</code></p></li>
+</ul>
+</section>
+<section id="fastcore.xtras" class="level2">
+<h2 class="anchored" data-anchor-id="fastcore.xtras">fastcore.xtras</h2>
+<blockquote class="blockquote">
+<p>Utility functions used in the fastai library</p>
+</blockquote>
+<ul>
+<li><p><code>def walk(path, symlinks, keep_file, keep_folder, skip_folder, func, ret_folders)</code> Generator version of <code>os.walk</code>, using functions to filter files and folders</p></li>
+<li><p><code>def globtastic(path, recursive, symlinks, file_glob, file_re, folder_re, skip_file_glob, skip_file_re, skip_folder_re, func, ret_folders)</code> A more powerful <code>glob</code>, including regex matches, symlink handling, and skip parameters</p></li>
+<li><p><code>@contextmanager def maybe_open(f, mode, **kwargs)</code> Context manager: open <code>f</code> if it is a path (and close on exit)</p></li>
+<li><p><code>def mkdir(path, exist_ok, parents, overwrite, **kwargs)</code> Creates and returns a directory defined by <code>path</code>, optionally removing previous existing directory if <code>overwrite</code> is <code>True</code></p></li>
+<li><p><code>def image_size(fn)</code> Tuple of (w,h) for png, gif, or jpg; <code>None</code> otherwise</p></li>
+<li><p><code>def bunzip(fn)</code> bunzip <code>fn</code>, raising exception if output already exists</p></li>
+<li><p><code>def loads(s, **kw)</code> Same as <code>json.loads</code>, but handles <code>None</code></p></li>
+<li><p><code>def loads_multi(s)</code> Generator of &gt;=0 decoded json dicts, possibly with non-json ignored text at start and end</p></li>
+<li><p><code>def dumps(obj, **kw)</code> Same as <code>json.dumps</code>, but uses <code>ujson</code> if available</p></li>
+<li><p><code>def untar_dir(fname, dest, rename, overwrite)</code> untar <code>file</code> into <code>dest</code>, creating a directory if the root contains more than one item</p></li>
+<li><p><code>def repo_details(url)</code> Tuple of <code>owner,name</code> from ssh or https git repo <code>url</code></p></li>
+<li><p><code>def run(cmd, *rest)</code> Pass <code>cmd</code> (splitting with <code>shlex</code> if string) to <code>subprocess.run</code>; return <code>stdout</code>; raise <code>IOError</code> if fails</p></li>
+<li><p><code>def open_file(fn, mode, **kwargs)</code> Open a file, with optional compression if gz or bz2 suffix</p></li>
+<li><p><code>def save_pickle(fn, o)</code> Save a pickle file, to a file name or opened file</p></li>
+<li><p><code>def load_pickle(fn)</code> Load a pickle file from a file name or opened file</p></li>
+<li><p><code>def parse_env(s, fn)</code> Parse a shell-style environment string or file</p></li>
+<li><p><code>def expand_wildcards(code)</code> Expand all wildcard imports in the given code string.</p></li>
+<li><p><code>def dict2obj(d, list_func, dict_func)</code> Convert (possibly nested) dicts (or lists of dicts) to <code>AttrDict</code></p></li>
+<li><p><code>def obj2dict(d)</code> Convert (possibly nested) AttrDicts (or lists of AttrDicts) to <code>dict</code></p></li>
+<li><p><code>def repr_dict(d)</code> Print nested dicts and lists, such as returned by <code>dict2obj</code></p></li>
+<li><p><code>def is_listy(x)</code> <code>isinstance(x, (tuple,list,L,slice,Generator))</code></p></li>
+<li><p><code>def mapped(f, it)</code> map <code>f</code> over <code>it</code>, unless it’s not listy, in which case return <code>f(it)</code></p></li>
+<li><p><code>@patch def readlines(self, hint, encoding)</code> Read the content of <code>self</code></p></li>
+<li><p><code>@patch def read_json(self, encoding, errors)</code> Same as <code>read_text</code> followed by <code>loads</code></p></li>
+<li><p><code>@patch def mk_write(self, data, encoding, errors, mode)</code> Make all parent dirs of <code>self</code>, and write <code>data</code></p></li>
+<li><p><code>@patch def relpath(self, start)</code> Same as <code>os.path.relpath</code>, but returns a <code>Path</code>, and resolves symlinks</p></li>
+<li><p><code>@patch def ls(self, n_max, file_type, file_exts)</code> Contents of path as a list</p></li>
+<li><p><code>@patch def delete(self)</code> Delete a file, symlink, or directory tree</p></li>
+<li><p><code>class IterLen</code> Base class to add iteration to anything supporting <code>__len__</code> and <code>__getitem__</code></p>
+<ul>
+<li><code>def __iter__(self)</code></li>
+</ul></li>
+<li><p><code>@docs class ReindexCollection</code> Reindexes collection <code>coll</code> with indices <code>idxs</code> and optional LRU cache of size <code>cache</code></p>
+<ul>
+<li><code>def __init__(self, coll, idxs, cache, tfm)</code></li>
+<li><code>def __getitem__(self, i)</code></li>
+<li><code>def __len__(self)</code></li>
+<li><code>def reindex(self, idxs)</code></li>
+<li><code>def shuffle(self)</code></li>
+<li><code>def cache_clear(self)</code></li>
+<li><code>def __getstate__(self)</code></li>
+<li><code>def __setstate__(self, s)</code></li>
+</ul></li>
+<li><p><code>def get_source_link(func)</code> Return link to <code>func</code> in source code</p></li>
+<li><p><code>def truncstr(s, maxlen, suf, space)</code> Truncate <code>s</code> to length <code>maxlen</code>, adding suffix <code>suf</code> if truncated</p></li>
+<li><p><code>def sparkline(data, mn, mx, empty_zero)</code> Sparkline for <code>data</code>, with <code>None</code>s (and zero, if <code>empty_zero</code>) shown as empty column</p></li>
+<li><p><code>def modify_exception(e, msg, replace)</code> Modifies <code>e</code> with a custom message attached</p></li>
+<li><p><code>def round_multiple(x, mult, round_down)</code> Round <code>x</code> to nearest multiple of <code>mult</code></p></li>
+<li><p><code>def set_num_threads(nt)</code> Get numpy (and others) to use <code>nt</code> threads</p></li>
+<li><p><code>def join_path_file(file, path, ext)</code> Return <code>path/file</code> if file is a string or a <code>Path</code>, file otherwise</p></li>
+<li><p><code>def autostart(g)</code> Decorator that automatically starts a generator</p></li>
+<li><p><code>class EventTimer</code> An event timer with history of <code>store</code> items of time <code>span</code></p>
+<ul>
+<li><p><code>def __init__(self, store, span)</code></p></li>
+<li><p><code>def add(self, n)</code> Record <code>n</code> events</p></li>
+<li><p><code>@property def duration(self)</code></p></li>
+<li><p><code>@property def freq(self)</code></p></li>
+</ul></li>
+<li><p><code>def stringfmt_names(s)</code> Unique brace-delimited names in <code>s</code></p></li>
+<li><p><code>class PartialFormatter</code> A <code>string.Formatter</code> that doesn’t error on missing fields, and tracks missing fields and unused args</p>
+<ul>
+<li><code>def __init__(self)</code></li>
+<li><code>def get_field(self, nm, args, kwargs)</code></li>
+<li><code>def check_unused_args(self, used, args, kwargs)</code></li>
+</ul></li>
+<li><p><code>def partial_format(s, **kwargs)</code> string format <code>s</code>, ignoring missing field errors, returning missing and extra fields</p></li>
+<li><p><code>def utc2local(dt)</code> Convert <code>dt</code> from UTC to local time</p></li>
+<li><p><code>def local2utc(dt)</code> Convert <code>dt</code> from local to UTC time</p></li>
+<li><p><code>def trace(f)</code> Add <code>set_trace</code> to an existing function <code>f</code></p></li>
+<li><p><code>@contextmanager def modified_env(*delete, **replace)</code> Context manager temporarily modifying <code>os.environ</code> by deleting <code>delete</code> and replacing <code>replace</code></p></li>
+<li><p><code>class ContextManagers</code> Wrapper for <code>contextlib.ExitStack</code> which enters a collection of context managers</p>
+<ul>
+<li><code>def __init__(self, mgrs)</code></li>
+<li><code>def __enter__(self)</code></li>
+<li><code>def __exit__(self, *args, **kwargs)</code></li>
+</ul></li>
+<li><p><code>def shufflish(x, pct)</code> Randomly relocate items of <code>x</code> up to <code>pct</code> of <code>len(x)</code> from their starting location</p></li>
+<li><p><code>def console_help(libname)</code> Show help for all console scripts from <code>libname</code></p></li>
+<li><p><code>def hl_md(s, lang, show)</code> Syntax highlight <code>s</code> using <code>lang</code>.</p></li>
+<li><p><code>def type2str(typ)</code> Stringify <code>typ</code></p></li>
+<li><p><code>class Unset</code></p>
+<ul>
+<li><code>def __repr__(self)</code></li>
+<li><code>def __str__(self)</code></li>
+<li><code>def __bool__(self)</code></li>
+<li><code>@property def name(self)</code></li>
+</ul></li>
+<li><p><code>def nullable_dc(cls)</code> Like <code>dataclass</code>, but default of <code>UNSET</code> added to fields without defaults</p></li>
+<li><p><code>def flexiclass(cls)</code> Convert <code>cls</code> into a <code>dataclass</code> like <code>make_nullable</code>. Converts in place and also returns the result.</p></li>
+<li><p><code>def asdict(o)</code> Convert <code>o</code> to a <code>dict</code>, supporting dataclasses, namedtuples, iterables, and <code>__dict__</code> attrs.</p></li>
+<li><p><code>def is_typeddict(cls)</code> Check if <code>cls</code> is a <code>TypedDict</code></p></li>
+<li><p><code>def is_namedtuple(cls)</code> <code>True</code> if <code>cls</code> is a namedtuple type</p></li>
+<li><p><code>def flexicache(*funcs)</code> Like <code>lru_cache</code>, but customisable with policy <code>funcs</code></p></li>
+<li><p><code>def time_policy(seconds)</code> A <code>flexicache</code> policy that expires cached items after <code>seconds</code> have passed</p></li>
+<li><p><code>def mtime_policy(filepath)</code> A <code>flexicache</code> policy that expires cached items after <code>filepath</code> modified-time changes</p></li>
+<li><p><code>def timed_cache(seconds, maxsize)</code> Like <code>lru_cache</code>, but also with time-based eviction</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/AnswerDotAI\.github\.io\/pysymbol-llm");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AnswerDotAI/pysymbol-llm/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
