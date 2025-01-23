@@ -4,7 +4,8 @@
 
 # %% auto 0
 __all__ = ['format_symbol', 'is_public_symbol', 'is_valid_method', 'get_decorators', 'log_error', 'get_params',
-           'process_function', 'process_class', 'get_public_symbols', 'generate_markdown', 'pysym2md']
+           'process_function', 'process_class', 'is_enum_builtin', 'process_enum', 'get_public_symbols', 'format_enum',
+           'generate_markdown', 'pysym2md']
 
 # %% ../nbs/00_core.ipynb 2
 import importlib
@@ -55,6 +56,12 @@ def _process_method(method, method_name):
     method_signature = f"{method_name}({method_params})"
     method_doc = method.doc_node.value if method.doc_node else ""
     method_decorators = get_decorators(method)
+    
+    # Check if this is a property
+    if any(d == 'property' for d in method_decorators):
+        method_signature = method_name # Properties don't show parameters
+        method_doc = method.doc_node.value if method.doc_node else ""
+        
     return (method_name, method_signature, method_doc, method_decorators)
 
 def process_class(cls, name, include_no_docstring):
@@ -67,6 +74,22 @@ def process_class(cls, name, include_no_docstring):
     return ('class', name, class_doc, class_decorators, methods)
 
 # %% ../nbs/00_core.ipynb 15
+def is_enum_builtin(name): 
+    "Check if a name is a built-in enum property"
+    return name in {'name', 'value', '_name_', '_value_', 'values', 'names'}
+
+def process_enum(cls, name, include_no_docstring):
+    "Parse Enum classes"
+    class_doc = cls.doc_node.value if cls.doc_node else ""
+    class_decorators = get_decorators(cls)
+    members = [member_name for member_name, member in cls.items() 
+              if not member_name.startswith('_') and not isinstance(member, FunctionDef) 
+              and not is_enum_builtin(member_name)]
+    methods = [_process_method(method, method_name) for method_name, method in cls.items()  
+              if is_valid_method(method, method_name) and not is_enum_builtin(method_name)]
+    return ('enum', name, (members, methods), class_doc, class_decorators)
+
+# %% ../nbs/00_core.ipynb 17
 def get_public_symbols(module, include_no_docstring):
     "Extract all public symbols"
     symbols = []
@@ -77,11 +100,56 @@ def get_public_symbols(module, include_no_docstring):
                     symbol = process_function(obj, name, include_no_docstring)
                     if symbol: symbols.append(symbol)
                 elif isinstance(obj, ClassDef):
-                    symbols.append(process_class(obj, name, include_no_docstring))
+                    # Check if it's an Enum by looking for Enum in bases
+                    is_enum = any('Enum' in str(base) for base in obj.bases)
+                    if is_enum:
+                        symbols.append(process_enum(obj, name, include_no_docstring))
+                    else:
+                        symbols.append(process_class(obj, name, include_no_docstring))
             except Exception as e: log_error(name, e)
     return symbols
 
-# %% ../nbs/00_core.ipynb 17
+# %% ../nbs/00_core.ipynb 19
+def get_public_symbols(module, include_no_docstring):
+    "Extract all public symbols"
+    symbols = []
+    for name, obj in module.items():
+        if is_public_symbol(name):
+            try:
+                if isinstance(obj, FunctionDef):
+                    symbol = process_function(obj, name, include_no_docstring)
+                    if symbol: symbols.append(symbol)
+                elif isinstance(obj, ClassDef):
+                    # Check if it's an Enum by looking for Enum in bases
+                    is_enum = any('Enum' in str(base) for base in obj.bases)
+                    if is_enum:
+                        symbols.append(process_enum(obj, name, include_no_docstring))
+                    else:
+                        symbols.append(process_class(obj, name, include_no_docstring))
+            except Exception as e: log_error(name, e)
+    return symbols 
+
+# %% ../nbs/00_core.ipynb 20
+def format_enum(name, members_and_methods, doc, decorators=None):
+    "Format an enum class in markdown"
+    members, methods = members_and_methods
+    decorator_str = ' '.join(f'@{d}' for d in decorators) + ' ' if decorators else ''
+    formatted = f"- `{decorator_str.strip()}{' ' if decorator_str else ''}class {name}(Enum)`\n"
+    if doc:
+        doc_lines = doc.strip().split('\n')
+        formatted += '    ' + '\n    '.join(doc_lines) + '\n'
+    formatted += f'    Members: {", ".join(members)}\n\n'
+    
+    # Format methods like regular class methods
+    for method_name, method_signature, method_doc, method_decorators in methods:
+        method_decorator_str = ' '.join(f'@{d}' for d in method_decorators)
+        formatted += f"    - `{method_decorator_str + ' ' if method_decorator_str else ''}{method_signature}`\n"
+        if method_doc:
+            formatted += f"        {method_doc.strip()}\n\n"
+    
+    return formatted + '\n'
+
+# %% ../nbs/00_core.ipynb 22
 def generate_markdown(package_name, include_no_docstring, verbose=False):
     markdown = [f"# {package_name} Module Documentation\n\n"]
     
@@ -92,8 +160,7 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
         try:
             if verbose: print(f"Processing module: {module_name}")
             module = MANAGER.ast_from_module_name(module_name)
-            symbols = get_public_symbols(module, include_no_docstring)
-            
+            symbols = get_public_symbols(module, include_no_docstring)            
             if symbols:
                 markdown.append(f"## {module_name}\n\n")
                 module_doc = module.doc_node.value if module.doc_node else ""
@@ -120,6 +187,9 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
                             if method_doc:
                                 markdown.append(f"        {method_doc.strip()}\n\n")
                         markdown.append("\n")
+                    elif symbol[0] == 'enum':
+                        _, name, members, doc, decorators = symbol
+                        markdown.append(format_enum(name, members, doc, decorators))
             else:
                 if verbose: print(f"No public symbols found in {module_name}")
         except Exception as e:
@@ -127,7 +197,7 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
         
     return ''.join(markdown)
 
-# %% ../nbs/00_core.ipynb 22
+# %% ../nbs/00_core.ipynb 27
 @call_parse
 def pysym2md(package_name:Param("Name of the Python package", str),
              include_no_docstring:Param("Include symbols without docstrings?", store_true)=False,
