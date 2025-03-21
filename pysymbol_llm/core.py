@@ -156,7 +156,17 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
     try: package = importlib.import_module(package_name)
     except ImportError: raise ImportError(f"Could not import package {package_name}. Is it installed?")
 
-    for _, module_name, _ in pkgutil.walk_packages(package.__path__, package.__name__ + '.'):
+    def onerror(name):
+        import sys
+        from traceback import print_tb
+        try:
+            print(f"Error importing module {name}")
+            _type, _value, traceback = sys.exc_info()
+            print_tb(traceback)
+        except DeprecationWarning:
+            print(f"Skipped importing module {name} due to DeprecationWarning")
+
+    for _, module_name, _ in pkgutil.walk_packages(package.__path__, package.__name__ + '.', onerror=onerror):
         try:
             if verbose: print(f"Processing module: {module_name}")
             module = MANAGER.ast_from_module_name(module_name)
