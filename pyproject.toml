@@ -3,19 +3,16 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name="pysymbol-llm"
+name = "pysymbol-llm"
 dynamic = ["version"]
 description = "Generate manifest of public symbols win python projects w/docstrings"
 readme = "README.md"
-requires-python=">=3.7"
+requires-python = ">=3.7"
 license = {text = "Apache-2.0"}
 authors = [{name = "Hamel Husain", email = "hamel.husain@gmail.com"}]
 keywords = ['nbdev', 'jupyter', 'notebook', 'python']
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-]
-dependencies = ["fastcore","astroid"]
+classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+dependencies = ['fastcore', 'astroid']
 
 [project.urls]
 Repository = "https://github.com/AnswerDotAI/pysymbol-llm"
@@ -24,8 +21,10 @@ Documentation = "https://AnswerDotAI.github.io/pysymbol-llm"
 [project.entry-points.nbdev]
 pysymbol_llm = "pysymbol_llm._modidx:d"
 
+
 [project.scripts]
 pysym2md = "pysymbol_llm.core:pysym2md"
+
 [tool.setuptools.dynamic]
 version = {attr = "pysymbol_llm.__version__"}
 
