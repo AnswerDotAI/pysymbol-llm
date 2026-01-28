@@ -24,8 +24,14 @@ Documentation = "https://AnswerDotAI.github.io/pysymbol-llm"
 [project.entry-points.nbdev]
 pysymbol_llm = "pysymbol_llm._modidx:d"
 
+[project.scripts]
+pysym2md=pysymbol_llm.core:pysym2md
+
 [tool.setuptools.dynamic]
 version = {attr = "pysymbol_llm.__version__"}
+
+[project.scripts]
+pysym2md=pysymbol_llm.core:pysym2md
 
 [tool.setuptools.packages.find]
 include = ["pysymbol_llm"]
