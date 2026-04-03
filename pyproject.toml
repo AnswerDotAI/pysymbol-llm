@@ -32,4 +32,5 @@ version = {attr = "pysymbol_llm.__version__"}
 include = ["pysymbol_llm"]
 
 [tool.nbdev]
+allowed_cell_metadata_keys = ["solveit_ai"]
 custom_sidebar = false
