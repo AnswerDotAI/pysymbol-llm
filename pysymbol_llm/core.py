@@ -7,14 +7,14 @@ __all__ = ['format_symbol', 'is_public_symbol', 'is_valid_method', 'get_decorato
            'process_function', 'process_class', 'is_enum_builtin', 'process_enum', 'get_public_symbols', 'format_enum',
            'generate_markdown', 'pysym2md']
 
-# %% ../nbs/00_core.ipynb #5ebcd43e
+# %% ../nbs/00_core.ipynb #0c94c158
 import importlib
 import pkgutil
 from astroid import MANAGER, FunctionDef, ClassDef
 from fastcore.utils import Path
 from fastcore.script import call_parse, store_false, store_true, Param
 
-# %% ../nbs/00_core.ipynb #b68d0a29
+# %% ../nbs/00_core.ipynb #b6f71100
 def format_symbol(name, signature, doc, decorators=None, is_method=False):
     "format the information in markdown"
     params = signature.split('(', 1)[1].rsplit(')', 1)[0] if '(' in signature else ''
@@ -25,13 +25,13 @@ def format_symbol(name, signature, doc, decorators=None, is_method=False):
         formatted += '    ' + '\n    '.join(doc_lines) + '\n'
     return formatted
 
-# %% ../nbs/00_core.ipynb #7859f641
+# %% ../nbs/00_core.ipynb #00add158
 def is_public_symbol(name): return not name.startswith('_') or (name.startswith('__') and name.endswith('__'))
 def is_valid_method(method, method_name): return isinstance(method, FunctionDef) and is_public_symbol(method_name)
 def get_decorators(obj): return [d.as_string() for d in obj.decorators.nodes] if obj.decorators else []
 def log_error(name, error): raise RuntimeError(f"Error processing symbol {name}: {str(error)}")
 
-# %% ../nbs/00_core.ipynb #fd80a5da
+# %% ../nbs/00_core.ipynb #8330c81b
 def get_params(func):
     params = []
     for arg in func.args.args: params.append(arg.name)
@@ -39,7 +39,7 @@ def get_params(func):
     if func.args.kwarg: params.append(f"**{func.args.kwarg}")
     return ', '.join(params)
 
-# %% ../nbs/00_core.ipynb #3e6f5e55
+# %% ../nbs/00_core.ipynb #de26ed48
 def process_function(func, name, include_no_docstring):
     "Parse functions"
     params = get_params(func)
@@ -50,7 +50,7 @@ def process_function(func, name, include_no_docstring):
         return ('function', name, signature, doc, decorators)
     return None
 
-# %% ../nbs/00_core.ipynb #26e5b69d
+# %% ../nbs/00_core.ipynb #feaa217b
 def _process_method(method, method_name):
     method_params = get_params(method)
     method_signature = f"{method_name}({method_params})"
@@ -73,7 +73,7 @@ def process_class(cls, name, include_no_docstring):
                if is_valid_method(method, method_name)]
     return ('class', name, class_doc, class_decorators, methods)
 
-# %% ../nbs/00_core.ipynb #3282bf2d
+# %% ../nbs/00_core.ipynb #bcf2bf2a
 def is_enum_builtin(name): 
     "Check if a name is a built-in enum property"
     return name in {'name', 'value', '_name_', '_value_', 'values', 'names'}
@@ -89,7 +89,7 @@ def process_enum(cls, name, include_no_docstring):
               if is_valid_method(method, method_name) and not is_enum_builtin(method_name)]
     return ('enum', name, (members, methods), class_doc, class_decorators)
 
-# %% ../nbs/00_core.ipynb #9d3ba6d8
+# %% ../nbs/00_core.ipynb #e6061337
 def get_public_symbols(module, include_no_docstring):
     "Extract all public symbols"
     symbols = []
@@ -109,7 +109,7 @@ def get_public_symbols(module, include_no_docstring):
             except Exception as e: log_error(name, e)
     return symbols
 
-# %% ../nbs/00_core.ipynb #a0b5324b
+# %% ../nbs/00_core.ipynb #194c2adc
 def get_public_symbols(module, include_no_docstring):
     "Extract all public symbols"
     symbols = []
@@ -129,7 +129,7 @@ def get_public_symbols(module, include_no_docstring):
             except Exception as e: log_error(name, e)
     return symbols 
 
-# %% ../nbs/00_core.ipynb #6ede7936
+# %% ../nbs/00_core.ipynb #987cc751
 def format_enum(name, members_and_methods, doc, decorators=None):
     "Format an enum class in markdown"
     members, methods = members_and_methods
@@ -149,7 +149,7 @@ def format_enum(name, members_and_methods, doc, decorators=None):
     
     return formatted + '\n'
 
-# %% ../nbs/00_core.ipynb #12ffe86b
+# %% ../nbs/00_core.ipynb #362e33c4
 def generate_markdown(package_name, include_no_docstring, verbose=False):
     markdown = [f"# {package_name} Module Documentation\n\n"]
     
@@ -197,7 +197,7 @@ def generate_markdown(package_name, include_no_docstring, verbose=False):
         
     return ''.join(markdown)
 
-# %% ../nbs/00_core.ipynb #68f4b68e
+# %% ../nbs/00_core.ipynb #93bfa078
 @call_parse
 def pysym2md(package_name:Param("Name of the Python package", str),
              include_no_docstring:Param("Include symbols without docstrings?", store_true)=False,
