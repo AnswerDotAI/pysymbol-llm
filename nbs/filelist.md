@@ -1,8 +1,71 @@
 # fastcore Module Documentation
 
+## fastcore.aio
+
+> Bridging async and sync code: `run_sync`, `iter_sync`, `ctx_sync`, `maybe_await`, and `then`
+> 
+> Docs: https://fastcore.fast.ai/aio.html.md
+
+- `def run_sync(coro)`
+    Run coroutine `coro` to completion from sync code and return its result
+
+- `def iter_sync(agen)`
+    Iterate async generator `agen` from sync code
+
+- `@contextmanager def ctx_sync(acm)`
+    Use async context manager `acm` in a plain `with` block
+
+- `def maybe_await(o)`
+    Await `o` if needed, and return it
+
+- `def then(x, *fs)`
+    Pipe `x` through each of `fs`, awaiting values as needed; result is awaitable only if `x` or a step result is
+
+- `def acache(f)`
+    Cache results of async function `f`
+
+- `class CachedAwaitable`
+    Cache the result from an awaitable
+
+    - `def __init__(self, o)`
+    - `def __await__(self)`
+
+- `def reawaitable(func)`
+    Wraps the result of an asynchronous function into an object which can be awaited more than once
+
+- `def is_async_callable(obj)`
+    Check if `obj` is an async callable, handling `partial` wrappers and callable instances
+
+- `def to_aiter(items)`
+    Async yield each item in `items` with `asyncio.sleep(0)` between
+
+- `def maybe_aiter(items)`
+    If `items` already async, return it; otherwise to_aiter
+
+- `def mapa(f, items)`
+    Async `map`; apply `f` (sync or async) to `items` (sync or async iter) concurrently via `gather`
+
+- `def noopa(x, *args, **kwargs)`
+    Do nothing (async)
+
+## fastcore.ansi
+
+> Filters for processing ANSI colors.
+
+- `def strip_ansi(source, term_queries)`
+    Remove ANSI escape codes from text.
+
+- `def ansi2html(text)`
+    Convert ANSI colors to HTML colors.
+
+- `def ansi2latex(text)`
+    Convert ANSI colors to LaTeX colors.
+
 ## fastcore.basics
 
 > Basic functionality used in the fastai library
+> 
+> Docs: https://fastcore.fast.ai/basics.html.md
 
 - `def ifnone(a, b)`
     `b` if `a` is None else `a`
@@ -12,6 +75,10 @@
 
 - `def basic_repr(flds)`
     Minimal `__repr__`
+
+- `class BasicRepr`
+    Base class for objects needing a basic `__repr__`
+
 
 - `def is_array(x)`
     `True` if `x` supports `__array__` or `iloc`
@@ -76,7 +143,7 @@
 - `def gen(func, seq, cond)`
     Like `(func(o) for o in seq if cond(func(o)))` but handles `StopIteration`
 
-- `def chunked(it, chunk_sz, drop_last, n_chunks)`
+- `def chunked(it, chunk_sz, drop_last, n_chunks, pad, pad_val)`
     Return batches from iterator `it` of size `chunk_sz` (or return `n_chunks` total)
 
 - `def otherwise(x, tst, y)`
@@ -85,16 +152,20 @@
 - `def custom_dir(c, add)`
     Implement custom `__dir__`, adding `add` to `cls`
 
-- `class AttrDict`
+- `class adict`
     `dict` subclass that also provides access to keys as attrs
 
     - `def __getattr__(self, k)`
     - `def __setattr__(self, k, v)`
     - `def __dir__(self)`
+
+- `class AttrDict`
+    `dict` subclass that also provides access to keys as attrs, and has a pretty markdown repr
+
     - `def copy(self)`
 
 - `class AttrDictDefault`
-    `AttrDict` subclass that returns `None` for missing attrs
+    `AttrDict` subclass that returns `default_` for missing attrs
 
     - `def __init__(self, *args, **kwargs)`
     - `def __getattr__(self, k)`
@@ -163,6 +234,16 @@
 - `def try_attrs(obj, *attrs)`
     Return first attr that exists in `obj`
 
+- `class DepProp`
+    Property decorator with dependency update triggering
+
+    - `def __init__(self, fchange, fnorm)`
+    - `def __set_name__(self, owner, name)`
+    - `def norm(self, fn)`
+    - `def __get__(self, o, objtype)`
+    - `def __set__(self, o, v)`
+    - `def __delete__(self, o)`
+
 - `class GetAttrBase`
     Basic delegation of `__getattr__` and `__dir__`
 
@@ -198,6 +279,9 @@
 
 - `def partition(coll, f)`
     Partition a collection by a predicate
+
+- `def partition_dict(d, f)`
+    Partition a dict by a predicate that takes key/value params
 
 - `def flatten(o)`
     Concatenate all collections and items as a generator
@@ -244,8 +328,8 @@
 - `def zip_cycle(x, *args)`
     Like `itertools.zip_longest` but `cycle`s through elements of all but first argument
 
-- `def sorted_ex(iterable, key, reverse)`
-    Like `sorted`, but if key is str use `attrgetter`; if int use `itemgetter`
+- `def sorted_ex(iterable, key, reverse, cmp, **kwargs)`
+    Like `sorted`, but if key is str use `attrgetter`; if int use `itemgetter`; use `cmp` comparator function or `key` with `kwargs`
 
 - `def not_(f)`
     Create new function that negates result of `f`
@@ -261,6 +345,9 @@
 
 - `def first(x, f, negate, **kwargs)`
     First element of `x`, optionally filtered by `f`, or None if missing
+
+- `def last(x, f, negate, **kwargs)`
+    Last element of `x`, optionally filtered by `f`, or None if missing
 
 - `def only(o)`
     Return the only item of `o`, raise if `o` doesn't have exactly one item
@@ -301,6 +388,9 @@
 - `def last_match(lst, f, default)`
     Last element of `lst` matching predicate `f`, or `default` if none
 
+- `def joins(sep, its)`
+    Sugar for `sep.join(map(str, its))`
+
 - `class fastuple`
     A `tuple` with elementwise ops and more friendly __init__ behavior
 
@@ -339,41 +429,50 @@
 - `def using_attr(f, attr)`
     Construct a function which applies `f` to the argument's attribute `attr`
 
+- `def negate(f)`
+    Returns the negation of `f`
+
+- `def fail_clean(*excs)`
+    Re-raise `excs` (default: `Exception`) without internal traceback frames
+
+- `def dstar(f)`
+    Wrap `f` to accept a single dict, unpacking it as keyword args
+
 - `def copy_func(f)`
     Copy a non-builtin function (NB `copy.copy` does not work for this)
 
-- `def patch_to(cls, as_prop, cls_method)`
+- `def patch_to(cls, as_prop, cls_method, set_prop, static_method, nm, glb)`
     Decorator: add `f` to `cls`
 
 - `def patch(f)`
     Decorator: add `f` to the first parameter's class (based on f's type annotations)
 
-- `def patch_property(f)`
-    Deprecated; use `patch(as_prop=True)` instead
+- `def extend_enum(cls, n, v)`
+    Add new member `n` with value `v` to enum class `cls` at runtime
 
 - `def compile_re(pat)`
     Compile `pat` if it's not None
 
-- `class ImportEnum`
+- `class ImportEnum(Enum)`
     An `Enum` that can have its values imported
+    Members: 
 
-    - `@classmethod def imports(cls)`
-    - `@property def name(self)`
+    - `@classmethod imports(cls)`
 
-- `class StrEnum`
+- `class StrEnum(Enum)`
     An `ImportEnum` that behaves like a `str`
+    Members: 
 
-    - `def __str__(self)`
-    - `@property def name(self)`
+    - `__str__(self)`
 
 - `def str_enum(name, *vals)`
     Simplified creation of `StrEnum` types
 
-- `class ValEnum`
+- `class ValEnum(Enum)`
     An `ImportEnum` that stringifies using values
+    Members: 
 
-    - `def __str__(self)`
-    - `@property def name(self)`
+    - `__str__(self)`
 
 - `class Stateful`
     A base class/mixin for objects that should not serialize all their state
@@ -397,6 +496,7 @@
     - `def __bool__(self)`
     - `def __contains__(self, b)`
     - `def __iter__(self)`
+    - `def __getitem__(self, i)`
 
 - `class PrettyString`
     Little hack to get strings to show properly in Jupyter.
@@ -412,8 +512,23 @@
 - `def add_props(f, g, n)`
     Create properties passing each of `range(n)` to f
 
-- `def typed(f)`
-    Decorator to check param and return types at runtime
+- `def str2bool(s)`
+    Case-insensitive convert string `s` too a bool (`y`,`yes`,`t`,`true`,`on`,`1`->`True`)
+
+- `def str2int(s)`
+    Convert `s` to an `int`
+
+- `def str2float(s)`
+    Convert `s` to a float
+
+- `def str2list(s)`
+    Convert `s` to a list
+
+- `def str2date(s)`
+    `date.fromisoformat` with empty string handling
+
+- `def typed(_func)`
+    Decorator to check param and return types at runtime, with optional casting
 
 - `def exec_new(code)`
     Execute `code` in a new environment and return it
@@ -421,66 +536,11 @@
 - `def exec_import(mod, sym)`
     Import `sym` from `mod` in a new environment
 
-- `def str2bool(s)`
-    Case-insensitive convert string `s` too a bool (`y`,`yes`,`t`,`true`,`on`,`1`->`True`)
-
-## fastcore.dispatch
-
-> Basic single and dual parameter dispatch
-
-- `def lenient_issubclass(cls, types)`
-    If possible return whether `cls` is a subclass of `types`, otherwise return False.
-
-- `def sorted_topologically(iterable)`
-    Return a new list containing all items from the iterable sorted topologically
-
-- `class TypeDispatch`
-    Dictionary-like object; `__getitem__` matches keys of types using `issubclass`
-
-    - `def __init__(self, funcs, bases)`
-    - `def add(self, f)`
-        Add type `t` and function `f`
-
-    - `def first(self)`
-        Get first function in ordered dict of type:func.
-
-    - `def returns(self, x)`
-        Get the return type of annotation of `x`.
-
-    - `def __repr__(self)`
-    - `def __call__(self, *args, **kwargs)`
-    - `def __get__(self, inst, owner)`
-    - `def __getitem__(self, k)`
-        Find first matching type that is a super-class of `k`
-
-
-- `class DispatchReg`
-    A global registry for `TypeDispatch` objects keyed by function name
-
-    - `def __init__(self)`
-    - `def __call__(self, f)`
-
-- `def retain_meta(x, res, as_copy)`
-    Call `res.set_meta(x)`, if it exists
-
-- `def default_set_meta(self, x, as_copy)`
-    Copy over `_meta` from `x` to `res`, if it's missing
-
-- `@typedispatch def cast(x, typ)`
-    cast `x` to type `typ` (may also change `x` inplace)
-
-- `def retain_type(new, old, typ, as_copy)`
-    Cast `new` to type of `old` or `typ` if it's a superclass
-
-- `def retain_types(new, old, typs)`
-    Cast each item of `new` to type of matching item in `old` if it's a superclass
-
-- `def explode_types(o)`
-    Return the type of `o`, potentially in nested dictionaries for thing that are listy
-
 ## fastcore.docments
 
 > Document parameters using comments.
+> 
+> Docs: https://fastcore.fast.ai/docments.html.md
 
 - `def docstring(sym)`
     Get docstring for `sym` for functions ad classes
@@ -503,11 +563,51 @@
 - `def qual_name(obj)`
     Get the qualified name of `obj`
 
-- `@delegates(_docments) def docments(elt, full, **kwargs)`
-    Generates a `docment`
+- `def ann_parts(anno)`
+    The underlying type and metadata tuple of an `Annotated`, else `(anno, ())`
+
+- `def docments(s, full, eval_str, returns, args_kwargs)`
+    Get docments for `s`
+
+- `def sig_source(obj)`
+    Full source of signature line(s) for a function or class.
 
 - `def extract_docstrings(code)`
     Create a dict from function/class/method names to tuples of docstrings and param lists
+
+- `class DocmentTbl`
+    - `def __init__(self, obj, verbose, returns)`
+        Compute the docment table string
+
+    - `@property def has_docment`
+    - `@property def has_return`
+    - `@property def hdr_str`
+    - `@property def params_str`
+    - `@property def return_str`
+    - `def __eq__(self, other)`
+
+- `class DocmentList`
+
+- `class DocmentText`
+    - `def __init__(self, obj, maxline, docstring)`
+    - `@property def params`
+    - `def __str__(self)`
+
+- `def sig2str(func, maxline)`
+    Generate function signature with docments as comments
+
+- `def can_render(sym)`
+    Check if `sym` has a renderable signature
+
+- `class ShowDocRenderer`
+    - `def __init__(self, sym, name, title_level, maxline)`
+        Show documentation for `sym`
+
+
+- `class MarkdownRenderer`
+    Markdown renderer for `show_doc`
+
+    - `def __repr__(self)`
 
 ## fastcore.docscrape
 
@@ -537,7 +637,7 @@
 - `class NumpyDocString`
     Parses a numpydoc string to an abstract representation
 
-    - `def __init__(self, docstring, config)`
+    - `def __init__(self, docstring, config, supported_sections, supports_params)`
     - `def __iter__(self)`
     - `def __len__(self)`
     - `def __getitem__(self, key)`
@@ -549,6 +649,8 @@
 ## fastcore.foundation
 
 > The `L` class and helpers for it
+> 
+> Docs: https://fastcore.fast.ai/foundation.html.md
 
 - `@contextmanager def working_directory(path)`
     Change working directory to `path` and return to previous on exit.
@@ -571,6 +673,12 @@
 - `def is_indexer(idx)`
     Test whether `idx` will index a single item in a list
 
+- `def product(xs)`
+    The product of elements of `xs`, with `None`s removed
+
+- `def flatmap(f, xs, **kwargs)`
+    Apply f to each element and flatten the results into a single list.
+
 - `class CollBase`
     Base class for composing a list of `items`
 
@@ -587,12 +695,12 @@
 
     - `def __init__(self, items, *rest)`
     - `def __getitem__(self, idx)`
-    - `def copy(self)`
+        Retrieve `idx` (can be list of indices, or mask, or int) items
+
     - `def __setitem__(self, idx, o)`
         Set `idx` (can be list of indices, or mask, or int) items to `o` (which is broadcast if not iterable)
 
     - `def __eq__(self, b)`
-    - `def sorted(self, key, reverse)`
     - `def __iter__(self)`
     - `def __contains__(self, b)`
     - `def __reversed__(self)`
@@ -602,55 +710,103 @@
     - `def __add__(a, b)`
     - `def __radd__(a, b)`
     - `def __addi__(a, b)`
-    - `@classmethod def split(cls, s, sep, maxsplit)`
-    - `@classmethod def range(cls, a, b, step)`
-    - `def map(self, f, *args, **kwargs)`
-    - `def argwhere(self, f, negate, **kwargs)`
-    - `def argfirst(self, f, negate)`
-    - `def filter(self, f, negate, **kwargs)`
-    - `def enumerate(self)`
-    - `def renumerate(self)`
-    - `def unique(self, sort, bidir, start)`
-    - `def val2idx(self)`
-    - `def cycle(self)`
-    - `def map_dict(self, f, *args, **kwargs)`
-    - `def map_first(self, f, g, *args, **kwargs)`
-    - `def itemgot(self, *idxs)`
-    - `def attrgot(self, k, default)`
-    - `def starmap(self, f, *args, **kwargs)`
-    - `def zip(self, cycled)`
-    - `def zipwith(self, *rest)`
-    - `def map_zip(self, f, *args, **kwargs)`
-    - `def map_zipwith(self, f, *rest, **kwargs)`
-    - `def shuffle(self)`
-    - `def concat(self)`
-    - `def reduce(self, f, initial)`
-    - `def sum(self)`
-    - `def product(self)`
-    - `def setattrs(self, attr, val)`
 
-- `def save_config_file(file, d, **kwargs)`
-    Write settings dict to a new config file, or overwrite the existing one.
+- `@patch def unique(self, sort, bidir, start)`
+    Unique items, in stable order
 
-- `class Config`
-    Reading and writing `ConfigParser` ini files
+- `@patch(cls_method=True) def range(cls, a, b, step)`
+    Class Method: Same as `range`, but returns `L`. Can pass collection for `a`, to use `len(a)`
 
-    - `def __init__(self, cfg_path, cfg_name, create, save, extra_files, types)`
-    - `def __repr__(self)`
-    - `def __setitem__(self, k, v)`
-    - `def __contains__(self, k)`
-    - `def save(self)`
-    - `def __getattr__(self, k)`
-    - `def __getitem__(self, k)`
-    - `def get(self, k, default)`
-    - `def path(self, k, default)`
+- `@patch def enumerate(self)`
+    Same as `enumerate`
+
+- `@patch(cls_method=True) def split(cls, s, sep, maxsplit)`
+    Class Method: Same as `str.split`, but returns an `L`
+
+- `@patch(cls_method=True) def splitlines(cls, s, keepends)`
+    Class Method: Same as `str.splitlines`, but returns an `L`
+
+- `@patch @curryable def map(self, f, *args, **kwargs)`
+    Create new `L` with `f` applied to all `items`, passing `args` and `kwargs` to `f`
+
+- `def star(f)`
+    Adapt `f` to unpack its last argument, e.g. for use in `map`-style functions
+
+- `def rstar(f)`
+    Like `star`, but unpack the last argument in reverse order
+
+- `def splitter(sep, maxsplit)`
+    Create a partial function that splits strings into `L`
+
+- `def linesplitter(keepends)`
+    Create a partial function that splits strings by lines into `L`
+
+- `@patch def map_dict(self, f, *args, **kwargs)`
+    Like `map`, but creates a dict from `items` to function results
+
+- `@patch def zip(self, cycled)`
+    Create new `L` with `zip(*items)`
+
+- `@patch def map_zip(self, f, *args, **kwargs)`
+    Apply `f` to `zip` of items, unpacking each zipped tuple
+
+- `@patch def zipwith(self, *rest)`
+    Create new `L` with `self` zip with each of `*rest`
+
+- `@patch def map_zipwith(self, f, *rest, **kwargs)`
+    Apply `f` to `zipwith` of items, unpacking each zipped tuple
+
+- `@patch @curryable def filter(self, f, negate, **kwargs)`
+    Create new `L` filtered by predicate `f`, passing `args` and `kwargs` to `f`
+
+- `@patch @curryable def argfirst(self, f, negate)`
+    Return index of first matching item
+
+- `@patch def itemgot(self, *idxs)`
+    Create new `L` with item `idx` of all `items`
+
+- `@patch def attrgot(self, k, default)`
+    Create new `L` with attr `k` (or value `k` for dicts) of all `items`.
+
+- `@patch @curryable def sorted(self, key, reverse, cmp, **kwargs)`
+    New `L` sorted by `key`, using `sort_ex`. If key is str use `attrgetter`; if int use `itemgetter`
+
+- `@patch def shuffle(self)`
+    Same as `random.shuffle`, but not inplace
+
+- `@patch def sum(self)`
+    Sum of the items
+
+- `@patch def map_first(self, f, g, *args, **kwargs)`
+    First element of `map_filter`
+
+- `@patch @curryable def takewhile(self, f)`
+    Same as `itertools.takewhile`
+
+- `@patch @curryable def dropwhile(self, f)`
+    Same as `itertools.dropwhile`
+
+- `@patch @curryable def accumulate(self, f, initial)`
+    Same as `itertools.accumulate`
+
+- `@patch def pairwise(self)`
+    Same as `itertools.pairwise`
+
+- `@patch def compress(self, selectors)`
+    Same as `itertools.compress`
+
+- `@patch def permutations(self, r)`
+    Same as `itertools.permutations`
+
+- `@patch def combinations(self, r)`
+    Same as `itertools.combinations`
 
 ## fastcore.imghdr
 
 > Recognize image file formats based on their first few bytes.
 
 - `def test_jpeg(h, f)`
-    JPEG data with JFIF or Exif markers; and raw JPEG
+    JPEG data with JFIF or Exif markers; and raw JPEG including COM segments
 
 - `def test_gif(h, f)`
     GIF ('87 and '89 variants)
@@ -720,9 +876,17 @@
 - `def remove_suffix(text, suffix)`
     Temporary until py39 is a prereq
 
+- `def is_usable_tool(func)`
+    True if the function has a docstring and all parameters have types, meaning that it can be used as an LLM tool.
+
+- `def llmtool(f, **tmpls)`
+    Decorator to mark a function as an LLM tool. Pass `**tmpls` to format the docstring.
+
 ## fastcore.meta
 
 > Metaclasses
+> 
+> Docs: https://fastcore.fast.ai/meta.html.md
 
 - `def test_sig(f, b)`
     Test the signature of an object
@@ -764,18 +928,125 @@
 - `def use_kwargs(names, keep)`
     Decorator: replace `**kwargs` in signature with `names` params
 
-- `def delegates(to, keep, but)`
+- `def delegates(to, keep, but, sort_args)`
     Decorator: replace `**kwargs` in signature with params from `to`
 
 - `def method(f)`
     Mark `f` as a method
 
+- `def delegated(to, keep, but, sort_args)`
+    Like `delegates` but also populates delegated default kwargs at call time
+
 - `def funcs_kwargs(as_method)`
     Replace methods in `cls._methods` with those from `kwargs`
+
+- `def splice_sig(wrapper, fn, *skips)`
+    Replace `*args`/`**kwargs` in wrapper's sig with fn's params (minus skips)
+
+## fastcore.nbio
+
+> Reading and writing Jupyter notebooks
+> 
+> Docs: https://fastcore.fast.ai/nbio.html.md
+
+- `class NbCell`
+    - `def __init__(self, idx, cell)`
+    - `def set_source(self, source)`
+    - `def parsed_(self)`
+    - `def __hash__(self)`
+    - `def __eq__(self, o)`
+
+- `def dict2nb(js, **kwargs)`
+    Convert dict `js` to an `AttrDict`,
+
+- `def read_nb(path)`
+    Return notebook at `path`
+
+- `def mk_cell(text, cell_type, **kwargs)`
+    Create an `NbCell` containing `text`
+
+- `def new_nb(cells, meta, nbformat, nbformat_minor)`
+    Returns an empty new notebook
+
+- `def nb2dict(d, k)`
+    Convert parsed notebook to `dict`
+
+- `def nb2str(nb)`
+    Convert `nb` to a `str`
+
+- `def write_nb(nb, path)`
+    Write `nb` to `path`
+
+- `def apply_controls(text)`
+    Apply \r and \b to text, returning processed result
+
+- `def mk_stream(name, text)`
+    Helper to create an output stream dict
+
+- `def mk_result(metadata, **data)`
+    Helper to create an execute_result output dict
+
+- `def mk_display(metadata, **data)`
+    Helper to create a display_data output dict
+
+- `def mk_error(traceback, ename, evalue)`
+    Helper to create an error output dict
+
+- `def concat_streams(outputs)`
+    Concatenate stream outputs by name (stdout/stderr), preserving execute_result at end
+
+- `def render_output(out)`
+    Convert a single output dict to an HTML string
+
+- `def render_outputs(outputs)`
+    Render a full list of outputs, concatenating streams first.
+
+- `def render_text(outputs, html1st)`
+    Render notebook outputs to concise text, using XML-ish tags when multiple outputs are present.
+
+- `def cell2xml(cell, ids, incl_out)`
+    Convert NbCell to concise XML format
+
+- `def cells2xml(cells, wrap, ids, incl_out, **kw)`
+    Convert notebook cells to XML format
+
+- `class Notebook`
+    Read, query, and edit Jupyter notebooks
+
+    - `def __init__(self, nb, path)`
+    - `@classmethod def open(cls, path)`
+    - `def save(self, path)`
+    - `@property def cells`
+    - `@property def meta`
+    - `def __getitem__(self, k)`
+    - `def __setitem__(self, k, source)`
+    - `def __len__(self)`
+    - `def __iter__(self)`
+    - `def __contains__(self, k)`
+    - `def __delitem__(self, k)`
+    - `def __repr__(self)`
+    - `@property def concise`
+
+- `@patch def add(self, source, cell_type, idx, after, before, **kwargs)`
+    Add a new cell with `source` at `idx` (default: end), or `after`/`before` a cell id
+
+- `@patch def md(self, source, idx, after, before, **kwargs)`
+    Add a new cell with `source` at `idx` (default: end), or `after`/`before` a cell id
+
+- `@patch def find(self, pat, cell_type)`
+    Find cells with source matching regex `pat`
+
+- `@patch def move(self, src_ids, after, before)`
+    Move cells with `src_ids` after/before a cell id, or to end
+
+- `@patch def view(self, id, nums)`
+    Show cell source with optional line numbers
 
 ## fastcore.net
 
 > Network, HTTP, and URL functions
+> 
+> Docs: https://fastcore.fast.ai/net.html.md
 
 - `def urlquote(url)`
     Update url's path with `urllib.parse.quote`
@@ -797,7 +1068,7 @@
 - `def urlread(url, data, headers, decode, return_json, return_headers, timeout, **kwargs)`
     Retrieve `url`, using `data` dict or `kwargs` to `POST` if present
 
-- `def urljson(url, data, timeout)`
+- `def urljson(url, data, headers, timeout)`
     Retrieve `url` and decode json
 
 - `def urlclean(url)`
@@ -808,18 +1079,6 @@
 
 - `def urlvalid(x)`
     Test if `x` is a valid URL
-
-- `def urlrequest(url, verb, headers, route, query, data, json_data)`
-    `Request` for `url` with optional route params replaced by `route`, plus `query` string, and post `data`
-
-- `@patch def summary(self, skip)`
-    Summary containing full_url, headers, method, and data, removing `skip` from headers
-
-- `def urlsend(url, verb, headers, decode, route, query, data, json_data, return_json, return_headers, debug, timeout)`
-    Send request with `urlrequest`, converting result to json if `return_json`
-
-- `def do_request(url, post, headers, **data)`
-    Call GET or json-encoded POST on `url`, depending on `post`
 
 - `def start_server(port, host, dgram, reuse_addr, n_queue)`
     Create a `socket` server on `port`, with optional `host`, of type `dgram`
@@ -839,14 +1098,16 @@
 ## fastcore.parallel
 
 > Threading and multiprocessing functions
+> 
+> Docs: https://fastcore.fast.ai/parallel.html.md
 
-- `def threaded(process)`
+- `def threaded(process, daemon)`
     Run `f` in a `Thread` (or `Process` if `process=True`), and returns it
 
-- `def startthread(f)`
+- `def startthread(f, daemon)`
     Like `threaded`, but start thread immediately
 
-- `def startproc(f)`
+- `def startproc(f, daemon)`
     Like `threaded(True)`, but start Process immediately
 
 - `class ThreadPoolExecutor`
@@ -864,13 +1125,15 @@
 - `def parallel(f, items, *args, **kwargs)`
     Applies `func` in parallel to `items`, using `n_workers`
 
-- `def run_procs(f, f_done, args)`
-    Call `f` for each item in `args` in parallel, yielding `f_done`
+- `def parallel_async(f, items, *args, **kwargs)`
+    Applies `f` to `items` in parallel using asyncio and a semaphore to limit concurrency.
 
-- `def parallel_gen(cls, items, n_workers, **kwargs)`
-    Instantiate `cls` in `n_workers` procs & call each on a subset of `items` in parallel.
+- `def bg_task(coro)`
+    Like `asyncio.create_task` but logs exceptions for fire-and-forget tasks
 
 ## fastcore.py2pyi
+
+> Docs: https://fastcore.fast.ai/py2pyi.html.md
 
 - `def imp_mod(module_path, package)`
     Import dynamically the module referenced in `fn`
@@ -890,27 +1153,20 @@
 ## fastcore.script
 
 > A fast way to turn your python function into a script.
+> 
+> Docs: https://fastcore.fast.ai/script.html.md
 
 - `def store_true()`
-    Placeholder to pass to `Param` for `store_true` action
+    Placeholder annotation type for a `store_true` argparse action
 
 - `def store_false()`
-    Placeholder to pass to `Param` for `store_false` action
+    Placeholder annotation type for a `store_false` argparse action
 
 - `def bool_arg(v)`
-    Use as `type` for `Param` to get `bool` behavior
-
-- `class Param`
-    A parameter in a function used in `anno_parser` or `call_parse`
-
-    - `def __init__(self, help, type, opt, action, nargs, const, choices, required, default)`
-    - `def set_default(self, d)`
-    - `@property def pre(self)`
-    - `@property def kwargs(self)`
-    - `def __repr__(self)`
+    Annotation type giving `bool` behavior for CLI args
 
 - `def anno_parser(func, prog)`
-    Look at params (annotated with `Param`) in func and return an `ArgumentParser`
+    Look at params (with type/docments/`Annotated` annotations) in func and return an `ArgumentParser`
 
 - `def args_from_prog(func, prog)`
     Extract args from `prog`
@@ -918,9 +1174,14 @@
 - `def call_parse(func, nested)`
     Decorator to create a simple CLI from `func` using `anno_parser`
 
+- `def is_cli(func)`
+    True if a `call_parse` CLI run is in progress, optionally checking that `func` is the function being run
+
 ## fastcore.style
 
 > Fast styling for friendly CLIs.
+> 
+> Docs: https://fastcore.fast.ai/style.html.md
 
 - `class StyleCode`
     An escape sequence for styling terminal text.
@@ -943,9 +1204,14 @@
 ## fastcore.test
 
 > Helper functions to quickly write tests in notebooks
+> 
+> Docs: https://fastcore.fast.ai/test.html.md
 
-- `def test_fail(f, msg, contains, args, kwargs)`
-    Fails with `msg` unless `f()` raises an exception and (optionally) has `contains` in `e.args`
+- `def test_fail(f, msg, contains, exc, args, kwargs)`
+    Fails with `msg` unless `f()` raises an exception of type `exc` and (optionally) has `contains` in `e.args`; `expect_fail` is normally preferred
+
+- `@contextmanager def expect_fail(exc, contains, msg)`
+    Context manager that fails with `msg` unless body raises `exc` optionally containing `contains`
 
 - `def test(a, b, cmp, cname)`
     `assert` that `cmp(a,b)`; display inputs and `cname or cmp.__name__` if it fails
@@ -987,75 +1253,59 @@
     - `def __enter__(self)`
     - `def __exit__(self, type, value, traceback)`
 
-## fastcore.transform
+## fastcore.tools
 
-> Definition of `Transform` and `Pipeline`
+> Helpful tools for running cli commands and reading, modifying, and creating files in python. This is used primarily for AI's in tool loops for automating tasks involving the filesystem.
+> 
+> Docs: https://fastcore.fast.ai/tools.html.md
 
-- `class Transform`
-    Delegates (`__call__`,`decode`,`setup`) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if `split_idx` matches
+- `def explain_exc(task)`
+    Convert an current exception to  an LLM friendly error message.
 
-    - `def __init__(self, enc, dec, split_idx, order)`
-    - `@property def name(self)`
-    - `def __call__(self, x, **kwargs)`
-    - `def decode(self, x, **kwargs)`
-    - `def __repr__(self)`
-    - `def setup(self, items, train_setup)`
+- `def ensure(b, msg)`
+    Works like assert b, msg but raise ValueError and is not disabled when run with python -O
 
-- `class InplaceTransform`
-    A `Transform` that modifies in-place and just returns whatever it's passed
+- `def valid_path(path, must_exist, chk_perms)`
+    Return expanded/resolved Path, raising FileNotFoundError if must_exist and missing
 
+- `def run_cmd(cmd, argstr, disallow_re, allow_re)`
+    Run `cmd` passing split `argstr`, optionally checking for allowed argstr
 
-- `class DisplayedTransform`
-    A transform with a `__repr__` that shows its attrs
+- `@llmtool def rg(argstr, disallow_re, allow_re)`
+    Run the `rg` command with the args in `argstr`
 
-    - `@property def name(self)`
+- `@llmtool def sed(argstr, disallow_re, allow_re)`
+    Run the `sed` command with the args in `argstr` (e.g for reading a section of a file)
 
-- `class ItemTransform`
-    A transform that always take tuples as items
+- `@llmtool def view(path, view_range, nums, skip_folders)`
+    View directory or file contents with optional line range and numbers
 
-    - `def __call__(self, x, **kwargs)`
-    - `def decode(self, x, **kwargs)`
+- `@llmtool def create(path, file_text, overwrite)`
+    Creates a new file with the given content at the specified path
 
-- `def get_func(t, name, *args, **kwargs)`
-    Get the `t.name` (potentially partial-ized with `args` and `kwargs`) or `noop` if not defined
+- `@llmtool def insert(path, insert_line, new_str)`
+    Insert new_str at specified line number
 
-- `class Func`
-    Basic wrapper around a `name` with `args` and `kwargs` to call on a given type
+- `@llmtool def str_replace(path, old_str, new_str)`
+    Replace first occurrence of old_str with new_str in file
 
-    - `def __init__(self, name, *args, **kwargs)`
-    - `def __repr__(self)`
-    - `def __call__(self, t)`
+- `@llmtool def strs_replace(path, old_strs, new_strs)`
+    Replace for each str pair in old_strs,new_strs
 
-- `def compose_tfms(x, tfms, is_enc, reverse, **kwargs)`
-    Apply all `func_nm` attribute of `tfms` on `x`, maybe in `reverse` order
+- `@llmtool def replace_lines(path, start_line, end_line, new_content)`
+    Replace lines in file using start and end line-numbers (index starting at 1)
 
-- `def mk_transform(f)`
-    Convert function `f` to `Transform` if it isn't already one
+- `@llmtool def move_lines(path, start_line, end_line, dest_line)`
+    Move lines from start_line:end_line to before dest_line
 
-- `def gather_attrs(o, k, nm)`
-    Used in __getattr__ to collect all attrs `k` from `self.{nm}`
-
-- `def gather_attr_names(o, nm)`
-    Used in __dir__ to collect all attrs `k` from `self.{nm}`
-
-- `class Pipeline`
-    A pipeline of composed (for encode/decode) transforms, setup with types
-
-    - `def __init__(self, funcs, split_idx)`
-    - `def setup(self, items, train_setup)`
-    - `def add(self, ts, items, train_setup)`
-    - `def __call__(self, o)`
-    - `def __repr__(self)`
-    - `def __getitem__(self, i)`
-    - `def __setstate__(self, data)`
-    - `def __getattr__(self, k)`
-    - `def __dir__(self)`
-    - `def decode(self, o, full)`
-    - `def show(self, o, ctx, **kwargs)`
+- `def get_callable()`
+    Return callable objects defined in caller's module
 
 ## fastcore.xdg
 
 > XDG Base Directory Specification helpers.
+> 
+> Docs: https://fastcore.fast.ai/xdg.html.md
 
 - `def xdg_cache_home()`
     Path corresponding to `XDG_CACHE_HOME`
@@ -1081,19 +1331,27 @@
 ## fastcore.xml
 
 > Concise generation of XML.
+> 
+> Docs: https://fastcore.fast.ai/xml.html.md
 
 - `class FT`
     A 'Fast Tag' structure, containing `tag`,`children`,and `attrs`
 
     - `def __init__(self, tag, cs, attrs, void_, **kwargs)`
+    - `def on(self, f)`
+    - `def changed(self)`
     - `def __setattr__(self, k, v)`
     - `def __getattr__(self, k)`
-    - `@property def list(self)`
+    - `@property def list`
     - `def get(self, k, default)`
     - `def __repr__(self)`
-    - `def __add__(self, b)`
-    - `def __getitem__(self, idx)`
     - `def __iter__(self)`
+    - `def __getitem__(self, idx)`
+    - `def __setitem__(self, i, o)`
+    - `def __call__(self, *c, **kw)`
+    - `def set(self, *c, **kw)`
+        Set children and/or attributes (chainable)
+
 
 - `def ft(tag, *c, **kw)`
     Create an `FT` structure for `to_xml()`
@@ -1104,21 +1362,36 @@
 - `class Safe`
     - `def __html__(self)`
 
-- `def to_xml(elm, lvl, indent, do_escape)`
+- `def to_xml(*elms)`
     Convert `ft` element tree into an XML string
+
+- `def dict2xml(d, do_escape, unwrap)`
+    Convert `d` to XML tags, one per key/value pair, unwrapping if only single key in `unwrap` exists
 
 - `def highlight(s, lang)`
     Markdown to syntax-highlight `s` in language `lang`
 
+- `def mk_getattr(f)`
+    Create a module `__getattr__` for mapping undefined attributes to kebab-case HTML tags via factory `f`
+
 ## fastcore.xtras
 
 > Utility functions used in the fastai library
+> 
+> Docs: https://fastcore.fast.ai/xtras.html.md
 
-- `def walk(path, symlinks, keep_file, keep_folder, skip_folder, func, ret_folders)`
-    Generator version of `os.walk`, using functions to filter files and folders
+- `def walk(path, symlinks, keep_file, keep_folder, skip_folder, func, ret_folders, sort, maxdepth)`
+    Generator: yields files and (optionally) folders as unified, inline-sorted entries
 
-- `def globtastic(path, recursive, symlinks, file_glob, file_re, folder_re, skip_file_glob, skip_file_re, skip_folder_re, func, ret_folders)`
+- `def exttypes(types)`
+    Get exts for comma-separated or list `typ`; if not found in list, return list with just `types`.
+    Supported: py, js, java, c, cpp, rb, r, ex, sh, web, doc, cfg
+
+- `def globtastic(path, recursive, maxdepth, symlinks, file_glob, file_re, folder_re, skip_file_glob, skip_file_re, skip_folder_re, func, ret_folders, sort, types, exts)`
     A more powerful `glob`, including regex matches, symlink handling, and skip parameters
+
+- `@fdelegates(globtastic) def pglob(path, func, **kwargs)`
+    Shortcut for `globtastic(..., call=Path)`
 
 - `@contextmanager def maybe_open(f, mode, **kwargs)`
     Context manager: open `f` if it is a path (and close on exit)
@@ -1128,6 +1401,9 @@
 
 - `def image_size(fn)`
     Tuple of (w,h) for png, gif, or jpg; `None` otherwise
+
+- `def detect_mime(data)`
+    Get the MIME type for bytes `data`, covering common PDF, audio, video, and image types
 
 - `def bunzip(fn)`
     bunzip `fn`, raising exception if output already exists
@@ -1141,11 +1417,20 @@
 - `def dumps(obj, **kw)`
     Same as `json.dumps`, but uses `ujson` if available
 
-- `def untar_dir(fname, dest, rename, overwrite)`
-    untar `file` into `dest`, creating a directory if the root contains more than one item
+- `def untar_dir(fname, dest, rename, overwrite, uid, gid)`
+    untar `file` into `dest`, creating a directory if the root contains more than one item; recursively chown if `uid`/`gid` set
 
 - `def repo_details(url)`
     Tuple of `owner,name` from ssh or https git repo `url`
+
+- `def shell(*args, **kwargs)`
+    Shortcut for `subprocess.run(shell=True)`
+
+- `def ssh(host, args, user, sock)`
+    Run SSH command with given arguments
+
+- `def rsync_multi(ip, files, user, persist)`
+    Transfer multiple files with rename using persistent SSH connection
 
 - `def run(cmd, *rest)`
     Pass `cmd` (splitting with `shlex` if string) to `subprocess.run`; return `stdout`; raise `IOError` if fails
@@ -1165,7 +1450,48 @@
 - `def expand_wildcards(code)`
     Expand all wildcard imports in the given code string.
 
-- `def dict2obj(d, list_func, dict_func)`
+- `@patch def mkdir_perms(self, mode, parents, exist_ok, uid, gid)`
+    Create directory like Path.mkdir but optionally set uid/gid on newly created dirs
+
+- `@contextmanager def atomic_save(fn, mode, uid, gid, **kwargs)`
+    Context manager for writing a file atomically via a temp file that is renamed on close
+
+- `def load_mod(name, path)`
+    Load module `name` from file `path`
+
+- `def import_no_init(name)`
+    Import dotted `name` without running any `__init__.py`
+
+- `def save_config_file(file, d, **kwargs)`
+    Write settings dict to a new config file, or overwrite the existing one.
+
+- `def find_file_parents(fname, frompath)`
+    Search `cfg_path` and its parents to find `cfg_name`
+
+- `class Config`
+    Reading and writing `ConfigParser` ini files
+
+    - `def __init__(self, cfg_path, cfg_name, create, save, extra_files, types, **cfg_kwargs)`
+    - `def __repr__(self)`
+    - `def __setitem__(self, k, v)`
+    - `def __contains__(self, k)`
+    - `def save(self)`
+    - `def __getattr__(self, k)`
+    - `def __getitem__(self, k)`
+    - `def get(self, k, default)`
+    - `def path(self, k, default)`
+    - `@classmethod def find(cls, cfg_name, cfg_path, **kwargs)`
+        Search `cfg_path` and its parents to find `cfg_name`
+
+
+- `class Unset(Enum)`
+    Members: 
+
+    - `__repr__(self)`
+    - `__str__(self)`
+    - `__bool__(self)`
+
+- `def dict2obj(d, list_func, dict_func, **kwargs)`
     Convert (possibly nested) dicts (or lists of dicts) to `AttrDict`
 
 - `def obj2dict(d)`
@@ -1175,7 +1501,7 @@
     Print nested dicts and lists, such as returned by `dict2obj`
 
 - `def is_listy(x)`
-    `isinstance(x, (tuple,list,L,slice,Generator))`
+    `isinstance(x, (tuple,list,L,slice,Generator,set,frozenset))`
 
 - `def mapped(f, it)`
     map `f` over `it`, unless it's not listy, in which case return `f(it)`
@@ -1186,14 +1512,20 @@
 - `@patch def read_json(self, encoding, errors)`
     Same as `read_text` followed by `loads`
 
-- `@patch def mk_write(self, data, encoding, errors, mode)`
+- `@patch def mk_write(self, data, encoding, errors, mode, uid, gid)`
     Make all parent dirs of `self`, and write `data`
+
+- `@patch def write_json(self, data, encoding, errors, mode, uid, gid, **kw)`
+    Same as `dumps`followed by `mk_write`
 
 - `@patch def relpath(self, start)`
     Same as `os.path.relpath`, but returns a `Path`, and resolves symlinks
 
 - `@patch def ls(self, n_max, file_type, file_exts)`
     Contents of path as a list
+
+- `@patch def normpath(self)`
+    Normalize path, eliminating double slashes, etc.
 
 - `@patch def delete(self)`
     Delete a file, symlink, or directory tree
@@ -1215,11 +1547,44 @@
     - `def __getstate__(self)`
     - `def __setstate__(self, s)`
 
+- `class SaveReturn`
+    Wrap an iterator such that the generator function's return value is stored in `.value`
+
+    - `def __init__(self, its)`
+    - `def __iter__(self)`
+
+- `def trim_wraps(f, n)`
+    Like wraps, but removes the first n parameters from the signature
+
+- `def save_iter(g)`
+    Decorator that allows a generator function to store values in the returned iterator object
+
+- `def asave_iter(g)`
+    Like `save_iter`, but for async iterators
+
+- `def frontmatter(txt)`
+    Tuple of (dict, body) from frontmatter in `txt`; invalid/missing frontmatter returns ({}, txt)
+
+- `def clean_cli_output(txt, strip)`
+    Clean CLI output by handling alternate screen, carriage returns, and ANSI escapes
+
+- `def unqid(seeded)`
+    Generate a unique id suitable for use as a Python identifier
+
+- `def rtoken_hex(nbytes)`
+    Generate a random hex string using Python's random module.
+
+- `def friendly_name(levels, suffix)`
+    Generate a random human-readable name with customizable word levels and suffix length
+
+- `def n_friendly_names(levels, suffix)`
+    Number of possible combos for `friendly_names
+
+- `def exec_eval(code, g, l)`
+    Evaluate `code` in `g` (defaults to `globals()`) and `l` (defaults to `locals()`)
+
 - `def get_source_link(func)`
     Return link to `func` in source code
-
-- `def truncstr(s, maxlen, suf, space)`
-    Truncate `s` to length `maxlen`, adding suffix `suf` if truncated
 
 - `def sparkline(data, mn, mx, empty_zero)`
     Sparkline for `data`, with `None`s (and zero, if `empty_zero`) shown as empty column
@@ -1246,8 +1611,8 @@
     - `def add(self, n)`
         Record `n` events
 
-    - `@property def duration(self)`
-    - `@property def freq(self)`
+    - `@property def duration`
+    - `@property def freq`
 
 - `def stringfmt_names(s)`
     Unique brace-delimited names in `s`
@@ -1261,6 +1626,9 @@
 
 - `def partial_format(s, **kwargs)`
     string format `s`, ignoring missing field errors, returning missing and extra fields
+
+- `def truncstr(s, maxlen, suf, space, sizevar)`
+    Truncate `s` to length `maxlen`, adding suffix `suf` if truncated
 
 - `def utc2local(dt)`
     Convert `dt` from UTC to local time
@@ -1293,12 +1661,6 @@
 - `def type2str(typ)`
     Stringify `typ`
 
-- `class Unset`
-    - `def __repr__(self)`
-    - `def __str__(self)`
-    - `def __bool__(self)`
-    - `@property def name(self)`
-
 - `def nullable_dc(cls)`
     Like `dataclass`, but default of `UNSET` added to fields without defaults
 
@@ -1308,11 +1670,20 @@
 - `def asdict(o)`
     Convert `o` to a `dict`, supporting dataclasses, namedtuples, iterables, and `__dict__` attrs.
 
+- `def vars_pub(x)`
+    Get public non-skipped vars
+
 - `def is_typeddict(cls)`
     Check if `cls` is a `TypedDict`
 
 - `def is_namedtuple(cls)`
     `True` if `cls` is a namedtuple type
+
+- `class CachedIter`
+    Cache the result returned by an iterator
+
+    - `def __init__(self, o)`
+    - `def __iter__(self)`
 
 - `def flexicache(*funcs)`
     Like `lru_cache`, but customisable with policy `funcs`
