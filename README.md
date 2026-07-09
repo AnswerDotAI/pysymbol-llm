@@ -67,5 +67,5 @@ can find package manager specific guidelines on
       -h, --help                 show this help message and exit
       --include_no_docstring     Include symbols without docstrings? (default:
                                  False)
-      --verbose                  Turn on verbose logging? (default: True)
+      --verbose                  Turn on verbose logging? (default: False)
       --output_file OUTPUT_FILE  The output file (default: filelist.md)
