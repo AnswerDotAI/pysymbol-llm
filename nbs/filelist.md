@@ -1691,8 +1691,8 @@
 - `def time_policy(seconds)`
     A `flexicache` policy that expires cached items after `seconds` have passed
 
-- `def mtime_policy(filepath)`
-    A `flexicache` policy that expires cached items after `filepath` modified-time changes
+- `def mtime_policy(filepath, arg)`
+    A `flexicache` policy that expires cached items after the watched file's modified-time changes
 
 - `def timed_cache(seconds, maxsize)`
     Like `lru_cache`, but also with time-based eviction

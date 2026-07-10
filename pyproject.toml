@@ -3,7 +3,7 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pysymbol-llm"
+name = "pysym2md"
 dynamic = ["version"]
 description = "Generate manifest of public symbols win python projects w/docstrings"
 readme = "README.md"
@@ -15,21 +15,21 @@ classifiers = ["Natural Language :: English", "Intended Audience :: Developers",
 dependencies = ['fastcore>=1.14.6', 'astroid']
 
 [project.urls]
-Repository = "https://github.com/AnswerDotAI/pysymbol-llm"
-Documentation = "https://AnswerDotAI.github.io/pysymbol-llm"
+Repository = "https://github.com/AnswerDotAI/pysym2md"
+Documentation = "https://AnswerDotAI.github.io/pysym2md"
 
 [project.entry-points.nbdev]
-pysymbol_llm = "pysymbol_llm._modidx:d"
+pysym2md = "pysym2md._modidx:d"
 
 
 [project.scripts]
-pysym2md = "pysymbol_llm.core:pysym2md"
+pysym2md = "pysym2md.core:pysym2md"
 
 [tool.setuptools.dynamic]
-version = {attr = "pysymbol_llm.__version__"}
+version = {attr = "pysym2md.__version__"}
 
 [tool.setuptools.packages.find]
-include = ["pysymbol_llm"]
+include = ["pysym2md"]
 
 [tool.nbdev]
 allowed_metadata_keys = ['solveit']
