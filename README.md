@@ -46,19 +46,19 @@ Documentation can be found hosted on this GitHub [repository](https://github.com
 !pysym2md -h
 ```
 
-    usage: pysym2md [-h] [--include_no_docstring] [--verbose]
-                    [--output_file OUTPUT_FILE]
+    usage: pysym2md [-h] [--include-no-docstring] [--verbose] [--output-file (str)]
                     package_name
 
     Generate a list of symbols corresponding to a python package in a markdown
     format.
 
     positional arguments:
-      package_name               Name of the Python package
+      package_name            Name of the Python package
 
     options:
-      -h, --help                 show this help message and exit
-      --include_no_docstring     Include symbols without docstrings? (default:
-                                 False)
-      --verbose                  Turn on verbose logging? (default: False)
-      --output_file OUTPUT_FILE  The output file (default: filelist.md)
+      -h, --help              show this help message and exit
+      --include-no-docstring  Include symbols without docstrings? (default: False)
+      --verbose               Turn on verbose logging? (default: False)
+      --output-file (str)     The output file (default: filelist.md)
+
+    pysym2md 0.1.3
